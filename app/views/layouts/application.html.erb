@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>DataDashboard</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <%= render '/layouts/logged_out_nav' %>
+  <head>
+    <title>DataDashboard</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <% flash.each do |message_type, message| %>
+      <%= content_tag(:div, message, class: "alert alert-info", id: 'flash') %>
+    <% end %>
+    <%= render '/layouts/logged_out_nav' %>
 
-<%= yield %>
+    <%= yield %>
 
-</body>
+    <script>
+      $(".navbar-nav li a").click(function (event) {
+        var toggle = $(".navbar-toggle").is(":visible");
+        if (toggle) {
+          $(".navbar-collapse").collapse('hide');
+        }
+      });
+
+      $(function() {
+        $('#flash').hide().delay(0).fadeIn('normal', function() {
+          $(this).delay(5000).fadeOut(1000);
+        });
+      });
+    </script>
+  </body>
 </html>

@@ -17,10 +17,11 @@
     <div class="navbar-collapse collapse" id="navbar-menu-items">
 
       <ul class="nav navbar-nav navbar-right" id="logged-out-nav">
-        <li><a href="#" data-toggle="modal" data-target="#signin-form" class="white-nav-button nav-button" id="sign-in-nav">SIGN IN</a></li>
-        <li><a href="#" data-toggle="modal" data-target="#signup-form" class="white-nav-button nav-button" id="sign-up-nav">SIGN UP</a></li>
-        <li><a href="/#about" class="white-nav-button nav-button" id="about-nav">ABOUT</a></li>
-        <li><a href="/contact" class="white-nav-button nav-button" id="contact-nav">CONTACT</a></li>
+        <% if current_admin.present? %>
+          <li><%= link_to('Log out', destroy_admin_session_path, method: :delete) %></li>
+        <% else %>
+          <li><%= link_to('Admin', new_admin_session_path) %></li>
+        <% end %>
       </ul>
     </div>
   </div>
