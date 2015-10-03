@@ -1,0 +1,28 @@
+<nav class="navbar navbar-minimal navbar-fixed-top landing-nav" role="navigation">
+  <div class="container">
+    <div class="logo-container col-xs-9 col-sm-4 col-md-4">
+      <a href="/#" id="logo" class="pull-left">
+        <img src=<%= image_url('logo.png') %> class="navbar-brand" id="landing-logo" style="padding:0px;">
+      </a>
+    </div>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu-items" id="color-toggle-box">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar" id="color-toggle-bar"></span>
+        <span class="icon-bar" id="color-toggle-bar"></span>
+        <span class="icon-bar" id="color-toggle-bar"></span>
+      </button>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-menu-items">
+
+      <ul class="nav navbar-nav navbar-right" id="logged-out-nav">
+        <li><a href="#" data-toggle="modal" data-target="#signin-form" class="white-nav-button nav-button" id="sign-in-nav">SIGN IN</a></li>
+        <li><a href="#" data-toggle="modal" data-target="#signup-form" class="white-nav-button nav-button" id="sign-up-nav">SIGN UP</a></li>
+        <li><a href="/#about" class="white-nav-button nav-button" id="about-nav">ABOUT</a></li>
+        <li><a href="/contact" class="white-nav-button nav-button" id="contact-nav">CONTACT</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="nav-spacer"></div>
