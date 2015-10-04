@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   namespace :admin do
-    resources :categories
+    resources :categories, only: [:index, :create, :update]
   end
 
   # Example of regular route:
