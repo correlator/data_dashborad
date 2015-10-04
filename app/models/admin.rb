@@ -5,4 +5,5 @@ class Admin < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :categories
+  has_many :pages
 end
