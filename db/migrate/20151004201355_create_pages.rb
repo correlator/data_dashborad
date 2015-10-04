@@ -6,6 +6,7 @@ class CreatePages < ActiveRecord::Migration
       t.text :intro_text
       t.integer :category_id
       t.integer :admin_id
+      t.integer :order
 
       t.timestamps
     end

@@ -5,9 +5,11 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
+    resources :pages, only: [:show]
 
   namespace :admin do
     resources :categories, only: [:index, :create, :update]
+    resources :pages, only: [:index, :create, :update, :edit]
   end
 
   # Example of regular route:

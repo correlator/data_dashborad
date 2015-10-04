@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20151004201355) do
     t.text     "intro_text"
     t.integer  "category_id"
     t.integer  "admin_id"
+    t.integer  "order"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
