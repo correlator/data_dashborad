@@ -7,7 +7,14 @@ class ApplicationController < ActionController::Base
 
   def authorize_superadmin
     if current_admin.nil? || !current_admin.super_admin
-      flash[:info] = 'Registrations are not open.'
+      flash[:info] = 'Access is restricted to super admins.'
+      redirect_to root_path
+    end
+  end
+
+  def authorize_admin
+    if current_admin.nil?
+      flash[:info] = 'Access is restricted to admins.'
       redirect_to root_path
     end
   end
