@@ -17,7 +17,11 @@
     <div class="navbar-collapse collapse" id="navbar-menu-items">
 
       <ul class="nav navbar-nav navbar-right" id="logged-out-nav">
-        <li><%= link_to('Admin', new_admin_session_path) %></li>
+        <% if current_admin.present? %>
+          <li><%= link_to('Log out', destroy_admin_session_path, method: :delete) %></li>
+        <% else %>
+          <li><%= link_to('Admin', new_admin_session_path) %></li>
+        <% end %>
       </ul>
     </div>
   </div>

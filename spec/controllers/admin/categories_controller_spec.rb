@@ -26,4 +26,19 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       expect(response).to redirect_to(root_path)
     end
   end
+
+  describe '#create' do
+    before { sign_in admin }
+
+    it 'should return the categories in order when admin is singed in' do
+      expect do
+        post :create, category: { name: 'First', order: '1', admin_id: admin.id }
+      end.to change { Category.count }.by 1
+    end
+
+    it 'should redirect to category index' do
+      post :create, category: { name: 'First', order: '1', admin_id: admin.id }
+      expect(response).to redirect_to(admin_categories_path)
+    end
+  end
 end

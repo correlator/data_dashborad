@@ -14,7 +14,9 @@
     <% end %>
     <%= render '/layouts/logged_in_nav' %>
 
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
 
     <script>
       $(".navbar-nav li a").click(function (event) {

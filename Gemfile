@@ -12,6 +12,7 @@ gem "bootstrap-sass"
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'puma'
+gem 'best_in_place', '3.0.3'
 
 gem 'devise'
 
