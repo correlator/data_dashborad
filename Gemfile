@@ -24,4 +24,6 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
   gem 'spring'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
 end
