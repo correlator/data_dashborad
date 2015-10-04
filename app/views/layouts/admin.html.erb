@@ -12,7 +12,7 @@
     <% flash.each do |message_type, message| %>
       <%= content_tag(:div, message, class: "alert alert-info", id: 'flash') %>
     <% end %>
-    <%= render '/layouts/logged_out_nav' %>
+    <%= render '/layouts/logged_in_nav' %>
 
     <%= yield %>
 

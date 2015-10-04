@@ -17,7 +17,10 @@
     <div class="navbar-collapse collapse" id="navbar-menu-items">
 
       <ul class="nav navbar-nav navbar-right" id="logged-out-nav">
-        <li><%= link_to('Admin', new_admin_session_path) %></li>
+        <li><%= link_to('Categories', admin_categories_path) %></li>
+        <li><%= link_to('Pages', '#') %></li>
+        <li><%= link_to('Graphs', '#') %></li>
+        <li><%= link_to('Log out', destroy_admin_session_path, method: :delete) %></li>
       </ul>
     </div>
   </div>
