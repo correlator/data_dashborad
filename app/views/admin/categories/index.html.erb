@@ -38,8 +38,8 @@
       <tbody>
         <% @categories.each do |category| %>
           <tr>
-            <td><%= best_in_place(category, :order, url: admin_categories_path(category)) %></td>
-            <td><%= best_in_place(category, :name, url: admin_categories_path(category)) %></td>
+            <td><%= best_in_place(category, :order, url: "/admin/categories/#{category.id}") %></td>
+            <td><%= best_in_place(category, :name, url: "/admin/categories/#{category.id}") %></td>
             <td><%= category.created_by.email %></td>
             <td><%= category.created_at %></td>
             <td><%= category.updated_at %></td>

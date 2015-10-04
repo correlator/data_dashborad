@@ -41,4 +41,16 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       expect(response).to redirect_to(admin_categories_path)
     end
   end
+
+  describe '#update' do
+    before do
+      category1
+      sign_in admin
+    end
+
+    it 'should update the category' do
+      patch :update, id: category1.id, category: { name: 'New Name' }, format: :json
+      expect(category1.reload.name).to eq 'New Name'
+    end
+  end
 end
