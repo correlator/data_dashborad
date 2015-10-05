@@ -1,11 +1,20 @@
-<h1 class="text-center"><%= @page.name %></h1>
-<h4><%= raw @page.intro_text %></h4>
+<div class="title-holder">
+  <h1 class="text-center"><%= @page.name %></h1>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h4><%= raw @page.intro_text %></h4>
+    </div>
+  </div>
+</div>
 
 <% @page.contents.each do |graph| %>
   <% if graph.class == Graph %>
     <%= render '/graphs/graph', graph: graph %>
   <% else %>
-    <iframe class="iframes" src=<%= graph.external_url %>></iframe>
+    <div class="iframe-holder">
+      <h2 class="text-center"><%= graph.title %></h2>
+      <iframe class="iframes" src=<%= graph.external_url %>></iframe>
+    </div>
   <% end %>
 
 <% end %>

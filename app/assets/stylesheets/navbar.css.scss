@@ -1,5 +1,24 @@
+.nav-spacer {
+  height: 55px;
+}
+
 .navbar {
   height: 55px;
+  background-color: #fff;
+  border-bottom-width: 1px;
+  border-bottom-color: #000;
+  border-bottom-style: solid;
+  color: red;
+}
+.navbar .navbar-nav > li > a {
+    color: #7d7d7f;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
 }
 
 #landing-logo {

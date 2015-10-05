@@ -2,21 +2,38 @@
 @import "bootstrap";
 
 body {
-}
-
-.nav-spacer {
-  height: 55px;
+  background-color: rgb(238, 238, 238);
 }
 
 .form-control {
   width: 100% !important;
 }
 
+.title-holder {
+  color: #fff;
+  background-color: #40bbea;
+  margin-bottom: 20px;
+}
+
 .select2 {
   width: 100% !important;
 }
 
+.iframe-holder {
+  background-color: #fff;
+  padding-top: 10px;
+  margin-bottom: 20px;
+  h2 {
+    font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', 'Verdana';
+    font-weight: 200;
+    font-size: 28px;
+  }
+}
+
 .iframes {
-  width: 100%;
+  width: 95%;
   height: 500px;
+  margin: 2.5%;
+  border-width: 1px;
+  border-style: solid;
 }
