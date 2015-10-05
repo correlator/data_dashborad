@@ -52,7 +52,7 @@
                 <td><%= best_in_place(graph, :title, url: "/admin/graphs/#{graph.id}") %></td>
                 <td><%= best_in_place(graph, :unit, url: "/admin/graphs/#{graph.id}") %></td>
                 <td><%= best_in_place(graph, :page_id, type: :select, collection:  Page.options_for_best_in_place, url: "/admin/graphs/#{page.id}") %></td>
-                <td><%= link_to 'Edit data', '/' %>
+                <td><%= link_to 'Edit data', "/admin/graphs/#{graph.id}" %>
               </tr>
             <% end %>
           </tbody>

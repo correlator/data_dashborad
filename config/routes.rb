@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :categories, only: [:index, :create, :update]
     resources :pages, only: [:index, :create, :update]
-    resources :graphs, only: [:index, :create, :update]
-    resources :lines, only: [:index, :update]
+    resources :graphs, only: [:index, :create, :update, :show]
+    resources :lines, only: [:update]
+    resources :points, only: [:update, :create]
   end
 
   # Example of regular route:

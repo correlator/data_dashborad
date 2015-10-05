@@ -9,6 +9,10 @@ class Admin::GraphsController < AdminController
     redirect_to admin_graphs_path
   end
 
+  def show
+    @graph = Graph.find(params[:id])
+  end
+
   def update
     @graph = Graph.find(params[:id])
     respond_to do |format|
