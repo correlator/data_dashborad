@@ -4,10 +4,6 @@ class Admin::PagesController < AdminController
     @page = Page.new
   end
 
-  def edit
-    @page = Page.find(params[:id])
-  end
-
   def create
     @page = Page.create(page_params)
     redirect_to admin_pages_path
@@ -15,10 +11,12 @@ class Admin::PagesController < AdminController
 
   def update
     @page = Page.find(params[:id])
-    if @page.update(page_params)
-      redirect_to admin_pages_path
-    else
-      render :edit
+    respond_to do |format|
+      if @page.update(page_params)
+        format.json { render json: @page }
+      else
+        format.json { render json: @page.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -26,6 +24,6 @@ class Admin::PagesController < AdminController
 
   def page_params
     params.require(:page)
-          .permit(:name, :title, :intro_text, :category_id, :admin_id)
+          .permit(:order, :name, :title, :intro_text, :category_id, :admin_id)
   end
 end
