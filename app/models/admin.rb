@@ -6,4 +6,5 @@ class Admin < ActiveRecord::Base
 
   has_many :categories
   has_many :pages
+  has_many :points
 end

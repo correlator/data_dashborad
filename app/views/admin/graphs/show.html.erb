@@ -1,65 +1,48 @@
 <h1 class="text-center"><%= "Data for #{@graph.title}" %></h1>
 
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="col-sm-12">
+<%= render '/graphs/graph', graph: @graph %>
 
-      <script type="text/javascript">
-      jQuery(document).ready(function($)
-      {
-        if( ! $.isFunction($.fn.dxChart))
-          return;
-        var dataSource = [
-          {dateField: new Date(1994, 2, 1), waittime: 1660450, goal: 1600000},
-          {dateField: new Date(1994, 3, 1), waittime: 1506274, goal: 1600000},
-          {dateField: new Date(1994, 4, 1), waittime: 1550343, goal: 1660000},
-          {dateField: new Date(1995, 8, 1), waittime: 1752279, goal: 1665000},
-
-        ];
-        $("#bar-7").dxChart({
-          dataSource: dataSource,
-          commonSeriesSettings: {
-            argumentField: "dateField"
-          },
-            argumentAxis: {
-              argumentType: 'datetime'
-              },
-          series: [
-            { valueField: "waittime", name: "Zoo Attendance", color: "#7c38bc" },
-            { valueField: "goal", name: "Goal ", color: "#990000" },
-
-          ],
-          argumentAxis:{
-            grid:{
-              visible: true
-            }
-          },
-          tooltip:{
-            enabled: true
-          },
-          title: "<%= @graph.title %>",
-          legend: {
-            verticalAlignment: "bottom",
-            horizontalAlignment: "center"
-          },
-          commonPaneSettings: {
-            border:{
-              visible: true,
-              right: false
-            }
-          }
-        });
-      });
-      </script>
-      <div id="bar-7" style="height: 250px; width: 100%;"></div>
+<% @graph.lines.each do |line| %>
+  <div class="row">
+    <div class= col-md-12>
+      <h3 class="text-center"><%= line.title %></h3>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Value</th>
+            <th>Notes</th>
+            <th>Updated By</th>
+            <th>Updated at</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% line.points.each do |point| %>
+            <tr>
+              <td><%= best_in_place(point, :time, url: "/admin/points/#{point.id}") %></td>
+              <td><%= best_in_place(point, :value, url: "/admin/points/#{point.id}") %></td>
+              <td><%= best_in_place(point, :notes, url: "/admin/points/#{point.id}") %></td>
+              <td><%= point.created_by %></td>
+              <td><%= point.updated_at %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <%= form_for(Point.new, url: '/admin/points') do |f| %>
+              <%= f.hidden_field :line_id, value: line.id %>
+              <td><%= f.date_field :time, autofocus: true, placeholder: 'Time', class: 'form-control' %></td>
+              <td><%= f.text_field :value, autofocus: true, placeholder: 'Value', class: 'form-control' %></td>
+              <td><%= f.text_area :notes, autofocus: true, placeholder: 'Notes', class: 'form-control' %></td>
+              <td><%= f.submit 'Create Point', class: 'btn btn-success btn-wide', id: 'submit_button' %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-</div>
+<% end %>
 
-<div class="row">
-  <% @graph.lines.each do |line| %>
-    <div class= col-md-6>
-      <h3 class="text-center"><%= line.title %></h3>
-    </div>
-  <% end %>
-</div>
+<script>
+  $(document).ready(function() {
+    jQuery(".best_in_place").best_in_place();
+  });
+</script>

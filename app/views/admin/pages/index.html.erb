@@ -5,7 +5,6 @@
 
 <div class="row">
   <%= form_for(@page, url: '/admin/pages') do |f| %>
-      <%= f.hidden_field :admin_id, value: current_admin.id %>
     <div class="form-group">
       <%= f.label('Category', class: 'padded-label') %>
       <%= f.select(:category_id, options_for_select(Category.options_for_select, @page.category_id)) %>

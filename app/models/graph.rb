@@ -5,13 +5,13 @@ class Graph < ActiveRecord::Base
   belongs_to :page
 
   def data
-    data = {}
+    data = []
     lines.each do |line|
-      data[line.title] = {
-        times: line.times,
-        values: line.values,
-        unit: unit
-      }
+      line.points.each do |point|
+        data << { 'dateField' => point.time,
+                  'line' => line.title,
+                  line.title => point.value }
+      end
     end
     data
   end

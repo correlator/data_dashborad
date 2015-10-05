@@ -27,7 +27,7 @@ class Admin::GraphsController < AdminController
   private
 
   def graph_params
-    ps = params.require(:graph)
-               .permit(:order, :title, :unit, :page_id)
+    params.require(:graph)
+          .permit(:order, :title, :unit, :page_id)
   end
 end
