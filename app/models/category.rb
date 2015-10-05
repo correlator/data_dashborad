@@ -11,6 +11,6 @@ class Category < ActiveRecord::Base
   end
 
   def created_by
-    admin.email
+    admin.email if admin
   end
 end

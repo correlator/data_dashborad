@@ -3,6 +3,6 @@ class Point < ActiveRecord::Base
   belongs_to :admin
 
   def created_by
-    admin.email
+    admin.email if admin
   end
 end

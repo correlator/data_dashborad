@@ -12,8 +12,10 @@ Rails.application.routes.draw do
     resources :pages, only: [:index, :create, :update]
     resources :graphs, only: [:index, :create, :update, :show]
     resources :external_graphs, only: [:index, :create, :update, :show]
-    resources :lines, only: [:update]
     resources :points, only: [:update, :create]
+    get '/manage_admins/', to: 'manage_admins#index'
+    put '/manage_admins/:id', to: 'manage_admins#update'
+    delete '/manage_admins/:id', to: 'manage_admins#destroy'
   end
 
   # Example of regular route:

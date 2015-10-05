@@ -13,7 +13,7 @@ class Page < ActiveRecord::Base
   end
 
   def created_by
-    admin.email
+    admin.email if admin
   end
 
   def contents

@@ -1,0 +1,39 @@
+<% provide :title, 'Manage Admins' %>
+
+<h1 class="text-center">Manage Admins</h1>
+<h4 class="text-center">This page is only accessable to super admins</h4>
+
+
+</br>
+
+<div class="row">
+  <div class="col-md-12">
+    <h4>Categories (click to edit)</h4>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Is Super?</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @admins.each do |admin| %>
+          <tr>
+            <td><%= admin.email %></td>
+            <td><%= best_in_place(admin, :super_admin, url: "/admin/manage_admins/#{admin.id}") %></td>
+            <td><%= link_to('Destroy', "/admin/manage_admins/#{admin.id}", method: :delete, data: { confirm: 'Are you certain you want to delete this Admin?  Any data created by them will no longer have a created by field' }) unless current_admin.id == admin.id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<script>
+  $(document).ready(function() {
+    jQuery(".best_in_place").best_in_place();
+    $("#admin_super_admin").select2({});
+  });
+</script>
