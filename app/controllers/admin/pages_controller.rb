@@ -23,7 +23,9 @@ class Admin::PagesController < AdminController
   private
 
   def page_params
-    params.require(:page)
-          .permit(:order, :name, :title, :intro_text, :category_id, :admin_id)
+    ps = params.require(:page)
+               .permit(:order, :name, :intro_text, :category_id)
+    ps[:admin_id] = current_admin.id
+    ps
   end
 end

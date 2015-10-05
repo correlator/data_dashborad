@@ -15,7 +15,18 @@ describe Category, type: :model do
     let!(:data_line) { graph.lines.create(title: 'Data')}
     let!(:goal_line) { graph.lines.create(title: 'Goal')}
     it 'should be able to have many lines' do
-      expect(graph.lines).to match_array [data_line, goal_line]
+      expect(graph.lines.count).to eq 4
+    end
+  end
+
+  context 'creation' do
+    # This is just to get the thing out the door we want to initialize
+    # a graph with 2 lines.  One called goal and another called data.
+    # Eventually want to add as many lines as desired in the ux.
+
+    it 'should start with 2 lines' do
+      new_graph = Graph.create(title: 'new_graph')
+      expect(new_graph.lines.pluck(:title)).to match_array ['Goal', 'Data']
     end
   end
 
@@ -34,9 +45,9 @@ describe Category, type: :model do
     let(:data_point1) { Point.create(time: Date.new(2015, 1, 1), value: 2) }
     let(:data_point2) { Point.create(time: Date.new(2015, 1, 2), value: 0) }
 
-    let(:line_goal) { Line.create(title: 'Goal', unit: 'Calls') }
-    let(:line_data) { Line.create(title: 'Data', unit: 'Calls') }
-    let(:graph) { Graph.create(title: 'Text Graph') }
+    let(:line_goal) { Line.create(title: 'Goal') }
+    let(:line_data) { Line.create(title: 'Data') }
+    let(:graph) { Graph.create(title: 'Text Graph', unit: 'Calls') }
 
     it 'should know its data' do
       expect(graph.data).to eq(

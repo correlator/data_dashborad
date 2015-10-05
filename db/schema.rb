@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005174851) do
+ActiveRecord::Schema.define(version: 20151005181412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,14 +44,16 @@ ActiveRecord::Schema.define(version: 20151005174851) do
   end
 
   create_table "graphs", force: :cascade do |t|
-    t.string "title"
+    t.string  "title"
+    t.string  "unit"
+    t.integer "page_id"
+    t.integer "order"
   end
 
   add_index "graphs", ["title"], name: "index_graphs_on_title", unique: true, using: :btree
 
   create_table "lines", force: :cascade do |t|
     t.string  "title"
-    t.string  "unit"
     t.integer "graph_id"
   end
 

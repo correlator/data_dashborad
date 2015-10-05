@@ -23,6 +23,8 @@ class Admin::CategoriesController < AdminController
   private
 
   def category_params
-    params.require(:category).permit(:name, :order, :admin_id)
+    ps = params.require(:category).permit(:name, :order)
+    ps[:admin_id] = current_admin.id
+    ps
   end
 end
