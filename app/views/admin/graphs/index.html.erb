@@ -4,27 +4,55 @@
 <h4 class="text-center">These are the graphs a user will see.  They appear in order on the selected page.</h4>
 
 <div class="row">
-  <%= form_for(@graph, url: '/admin/graphs') do |f| %>
-    <div class="form-group">
-      <%= f.label('Page', class: 'padded-label') %>
-      <%= f.select(:page_id, options_for_select(Page.options_for_select, @graph.page_id)) %>
-    </div>
-    <div class="form-group">
-      <%= f.label('Order', class: 'padded-label') %>
-      <%= f.number_field :order, autofocus: true, placeholder: 'Order (1)', class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label('Title', class: 'padded-label') %>
-      <%= f.text_field :title, autofocus: true, placeholder: 'Title for graph', class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label('Units', class: 'padded-label') %>
-      <%= f.text_field :unit, autofocus: true, placeholder: 'Calls per day', class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.submit 'Create Graph', class: 'btn btn-success btn-wide', id: 'submit_button' %>
-    </div>
-  <% end%>
+  <div class="col-md-6">
+    <h2 class="text-center">Internal</h2>
+    <%= form_for(Graph.new, url: '/admin/graphs') do |f| %>
+      <div class="form-group">
+        <%= f.label('Page', class: 'padded-label') %>
+        <%= f.select(:page_id, options_for_select(Page.options_for_select)) %>
+      </div>
+      <div class="form-group">
+        <%= f.label('Order', class: 'padded-label') %>
+        <%= f.number_field :order, autofocus: true, placeholder: 'Order (1)', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label('Title', class: 'padded-label') %>
+        <%= f.text_field :title, autofocus: true, placeholder: 'Title for graph', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label('Units', class: 'padded-label') %>
+        <%= f.text_field :unit, autofocus: true, placeholder: 'Calls per day', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit 'Create Internal Graph', class: 'btn btn-success btn-wide', id: 'submit_button' %>
+      </div>
+    <% end%>
+  </div>
+
+  <div class="col-md-6">
+    <h2 class="text-center">External</h2>
+    <%= form_for(ExternalGraph.new, url: '/admin/external_graphs') do |f| %>
+      <div class="form-group">
+        <%= f.label('Page', class: 'padded-label') %>
+        <%= f.select(:page_id, options_for_select(Page.options_for_select)) %>
+      </div>
+      <div class="form-group">
+        <%= f.label('Order', class: 'padded-label') %>
+        <%= f.number_field :order, autofocus: true, placeholder: 'Order (1)', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label('Title', class: 'padded-label') %>
+        <%= f.text_field :title, autofocus: true, placeholder: 'Title for graph', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label('Url', class: 'padded-label') %>
+        <%= f.text_field :external_url, autofocus: true, placeholder: 'https://abhinemani.cartodb.com/viz/809222ea-c822-11e4-9df5-0e9d821ea90d/embed_map', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit 'Create External Graph', class: 'btn btn-success btn-wide', id: 'submit_button' %>
+      </div>
+    <% end%>
+  </div>
 </div>
 
 </br>
@@ -40,20 +68,33 @@
             <tr>
               <th>Order</th>
               <th>Title</th>
-              <th>unit</th>
+              <th>Unit</th>
+              <th>Url</th>
               <th>Page</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <% page.graphs.each do |graph| %>
-              <tr>
-                <td><%= best_in_place(graph, :order, url: "/admin/graphs/#{graph.id}") %></td>
-                <td><%= best_in_place(graph, :title, url: "/admin/graphs/#{graph.id}") %></td>
-                <td><%= best_in_place(graph, :unit, url: "/admin/graphs/#{graph.id}") %></td>
-                <td><%= best_in_place(graph, :page_id, type: :select, collection:  Page.options_for_best_in_place, url: "/admin/graphs/#{graph.id}") %></td>
-                <td><%= link_to 'Edit data', "/admin/graphs/#{graph.id}" %>
-              </tr>
+            <% page.contents.each do |graph| %>
+              <% if graph.class == Graph %>
+                <tr>
+                  <td><%= best_in_place(graph, :order, url: "/admin/graphs/#{graph.id}") %></td>
+                  <td><%= best_in_place(graph, :title, url: "/admin/graphs/#{graph.id}") %></td>
+                  <td><%= best_in_place(graph, :unit, url: "/admin/graphs/#{graph.id}") %></td>
+                  <td></td>
+                  <td><%= best_in_place(graph, :page_id, type: :select, collection:  Page.options_for_best_in_place, url: "/admin/graphs/#{graph.id}") %></td>
+                  <td><%= link_to 'Edit data', "/admin/graphs/#{graph.id}" %>
+                </tr>
+              <% else %>
+                <tr>
+                  <td><%= best_in_place(graph, :order, url: "/admin/external_graphs/#{graph.id}") %></td>
+                  <td><%= best_in_place(graph, :title, url: "/admin/external_graphs/#{graph.id}") %></td>
+                  <td></td>
+                  <td><%= best_in_place(graph, :external_url, url: "/admin/external_graphs/#{graph.id}") %></td>
+                  <td><%= best_in_place(graph, :page_id, type: :select, collection:  Page.options_for_best_in_place, url: "/admin/external_graphs/#{graph.id}") %></td>
+                  <td><%= link_to 'Edit Graph', "/admin/external_graphs/#{graph.id}" %>
+                </tr>
+              <% end %>
             <% end %>
           </tbody>
         </table>
@@ -66,6 +107,7 @@
 <script>
   $(document).ready(function() {
     $("#graph_page_id").select2({});
+    $("#external_graph_page_id").select2({});
     jQuery(".best_in_place").best_in_place();
   });
 </script>

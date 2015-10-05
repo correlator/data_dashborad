@@ -1,7 +1,5 @@
 class Admin::GraphsController < AdminController
   def index
-    @graphs = Graph.all
-    @graph = Graph.new
   end
 
   def create

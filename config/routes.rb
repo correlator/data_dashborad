@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :create, :update]
     resources :pages, only: [:index, :create, :update]
     resources :graphs, only: [:index, :create, :update, :show]
+    resources :external_graphs, only: [:index, :create, :update, :show]
     resources :lines, only: [:update]
     resources :points, only: [:update, :create]
   end

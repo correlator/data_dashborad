@@ -1,6 +1,11 @@
 <h1 class="text-center"><%= @page.name %></h1>
 <h4><%= raw @page.intro_text %></h4>
 
-<% @page.graphs.order(:order).each do |graph| %>
-  <%= render '/graphs/graph', graph: graph %>
+<% @page.contents.each do |graph| %>
+  <% if graph.class == Graph %>
+    <%= render '/graphs/graph', graph: graph %>
+  <% else %>
+    <iframe class="iframes" src=<%= graph.external_url %>></iframe>
+  <% end %>
+
 <% end %>

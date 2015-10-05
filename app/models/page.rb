@@ -2,6 +2,7 @@ class Page < ActiveRecord::Base
   belongs_to :category
   belongs_to :admin
   has_many :graphs
+  has_many :external_graphs
 
   def self.options_for_select
     all.map { |page| [page.name, page.id] }
@@ -13,5 +14,9 @@ class Page < ActiveRecord::Base
 
   def created_by
     admin.email
+  end
+
+  def contents
+    (graphs + external_graphs).sort_by(&:order)
   end
 end
