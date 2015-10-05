@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require bootstrap
 //= require best_in_place
-//= require_tree .
+//= require globalize.min.js
+//= require dx.chartjs
+//= require select2
