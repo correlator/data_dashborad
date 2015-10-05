@@ -50,7 +50,7 @@
             <tr>
               <td><%= best_in_place(page, :order, url: "/admin/pages/#{page.id}") %></td>
               <td><%= best_in_place(page, :name, url: "/admin/pages/#{page.id}") %></td>
-              <td><%= best_in_place(page, :intro_text, url: "/admin/pages/#{page.id}") %></td>
+              <td><%= best_in_place(page, :intro_text, type: :textarea, url: "/admin/pages/#{page.id}") %></td>
               <td><%= best_in_place(page, :category_id, type: :select, collection:  Category.options_for_best_in_place, url: "/admin/pages/#{page.id}") %></td>
               <td><%= page.created_by %></td>
               <td><%= page.created_at %></td>
