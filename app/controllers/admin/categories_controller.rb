@@ -20,6 +20,14 @@ class Admin::CategoriesController < AdminController
     end
   end
 
+  def destroy
+    if current_admin.super_admin
+      Category.find_by(id: params[:id]).destroy
+    end
+    redirect_to admin_categories_path
+  end
+
+
   private
 
   def category_params

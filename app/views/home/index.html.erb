@@ -1,52 +1,19 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div class="col-sm-12">
-              
-      <script type="text/javascript">
-      jQuery(document).ready(function($)
-      {
-        if( ! $.isFunction($.fn.dxChart))
-          return;
-        var dataSource = [
-          {year: 'FY12', waittime: 1660450, goal: 1600000},
-          {year: 'FY13', waittime: 1506274, goal: 1600000},
-          {year: 'FY14', waittime: 1550343, goal: 1660000},
-          {year: 'FY15', waittime: 1752279, goal: 1665000},
-
-        ];
-        $("#bar-7").dxChart({
-          dataSource: dataSource,
-          commonSeriesSettings: {
-            argumentField: "year"
-          },
-          series: [
-            { valueField: "waittime", name: "Zoo Attendance", color: "#7c38bc" },
-            { valueField: "goal", name: "Goal ", color: "#990000" },
-            
-          ],
-          argumentAxis:{
-            grid:{
-              visible: true
-            }
-          },
-          tooltip:{
-            enabled: true
-          },
-          title: "Scott is awesome!",
-          legend: {
-            verticalAlignment: "bottom",
-            horizontalAlignment: "center"
-          },
-          commonPaneSettings: {
-            border:{
-              visible: true,
-              right: false
-            }
-          }
-        });
-      });
-      </script>
-      <div id="bar-7" style="height: 250px; width: 100%;"></div>
+<div class="title-holder">
+  <h1 class="text-center"><%= @page.name %></h1>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h4><%= raw @page.intro_text %></h4>
     </div>
   </div>
-</div>  
+</div>
+
+<% @page.contents.each do |graph| %>
+  <% if graph.class == Graph %>
+    <%= render '/graphs/graph', graph: graph %>
+  <% else %>
+    <div class="iframe-holder">
+      <h2 class="text-center"><%= graph.title %></h2>
+      <iframe class="iframes" src=<%= graph.external_url %>></iframe>
+    </div>
+  <% end %>
+<% end %>

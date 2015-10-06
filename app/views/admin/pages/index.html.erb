@@ -43,6 +43,7 @@
             <th>Last Updated By</th>
             <th>Created at</th>
             <th>Updated at</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -55,6 +56,11 @@
               <td><%= page.created_by %></td>
               <td><%= page.created_at %></td>
               <td><%= page.updated_at %></td>
+              <% if current_admin.super_admin %>
+                <td><%= link_to('Destroy', "/admin/pages/#{page.id}", method: :delete, data: { confirm: 'Are you certain you want to delete this page?' }) %></td>
+              <% else %>
+                <td>Only Super Admins</td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

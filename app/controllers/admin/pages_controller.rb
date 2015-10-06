@@ -20,6 +20,13 @@ class Admin::PagesController < AdminController
     end
   end
 
+  def destroy
+    if current_admin.super_admin
+      Page.find_by(id: params[:id]).destroy
+    end
+    redirect_to admin_pages_path
+  end
+
   private
 
   def page_params

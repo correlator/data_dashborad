@@ -33,16 +33,23 @@
           <th>Last Updated By</th>
           <th>Created at</th>
           <th>Updated at</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
         <% @categories.each do |category| %>
+          <% next if category.name == 'Hidden Category' %>
           <tr>
             <td><%= best_in_place(category, :order, url: "/admin/categories/#{category.id}") %></td>
             <td><%= best_in_place(category, :name, url: "/admin/categories/#{category.id}") %></td>
             <td><%= category.created_by %></td>
             <td><%= category.created_at %></td>
             <td><%= category.updated_at %></td>
+            <% if current_admin.super_admin %>
+              <td><%= link_to('Destroy', "/admin/categories/#{category.id}", method: :delete, data: { confirm: 'Are you certain you want to delete this category?' }) %></td>
+            <% else %>
+              <td>Only Super Admins</td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>

@@ -3,6 +3,7 @@ class Page < ActiveRecord::Base
   belongs_to :admin
   has_many :graphs
   has_many :external_graphs
+  validates_uniqueness_of :landing_page, :if => :landing_page
 
   def self.options_for_select
     all.map { |page| [page.name, page.id] }

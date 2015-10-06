@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+landing = Category.where(name: 'Landing Page', hidden: true).first_or_create
+Category.where(name: 'Hidden Category', hidden: true).first_or_create
+Page.where(name: 'Landing Page', landing_page: true, category_id: landing.id).first_or_create
