@@ -21,7 +21,7 @@
             <tr>
               <td><%= best_in_place(point, :time, url: "/admin/points/#{point.id}") %></td>
               <td><%= best_in_place(point, :value, url: "/admin/points/#{point.id}") %></td>
-              <td><%= best_in_place(point, :notes, url: "/admin/points/#{point.id}") %></td>
+              <td><%= best_in_place(point, :notes, as: :textarea, url: "/admin/points/#{point.id}") %></td>
               <td><%= point.created_by %></td>
               <td><%= point.updated_at %></td>
             </tr>
