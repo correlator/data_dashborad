@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :points, only: [:update, :create]
     get '/manage_admins/', to: 'manage_admins#index'
     put '/manage_admins/:id', to: 'manage_admins#update'
+    post '/manage_admins', to: 'manage_admins#create'
     delete '/manage_admins/:id', to: 'manage_admins#destroy'
   end
 

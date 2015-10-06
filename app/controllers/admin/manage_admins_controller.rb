@@ -6,6 +6,15 @@ class Admin::ManageAdminsController < AdminController
     @admins = Admin.all
   end
 
+  def create
+    new_admin = Admin.create(email: params[:admin][:email],
+                             password: SecureRandom.base64)
+    new_admin.send_reset_password_instructions
+    flash[:notice] = "Password reset instructions have been sent to #{params[:admin][:email]}"
+
+    redirect_to admin_manage_admins_path
+  end
+
   def update
     @admin = Admin.find(params[:id])
     respond_to do |format|
@@ -19,7 +28,7 @@ class Admin::ManageAdminsController < AdminController
 
   def destroy
     if current_admin.id.to_s != params[:id]
-      Admin.find_by(id: params[:id])
+      Admin.find_by(id: params[:id]).destroy
     end
     redirect_to admin_manage_admins_path
   end
