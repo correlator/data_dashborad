@@ -8,11 +8,11 @@
       <%= f.hidden_field :admin_id, value: current_admin.id %>
     <div class="form-group col-md-4">
       <%= f.label('Name', class: 'sr-only') %>
-      <%= f.text_field :name, autofocus: true, placeholder: 'Category name (MOCS)', class: 'form-control' %>
+      <%= f.text_field :name, autofocus: true, placeholder: 'Category name (MOCS)', class: 'form-control', required: true %>
     </div>
     <div class="form-group col-md-4">
       <%= f.label('Order', class: 'sr-only') %>
-      <%= f.number_field :order, autofocus: true, placeholder: 'Order (1)', class: 'form-control' %>
+      <%= f.number_field :order, autofocus: true, placeholder: 'Order (1)', class: 'form-control', required: true %>
     </div>
     <div class="form-group col-md-4">
       <%= f.submit 'Create Category', class: 'btn btn-success btn-wide', id: 'submit_button' %>
