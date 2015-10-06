@@ -1,12 +1,19 @@
 class Admin::PagesController < AdminController
   def index
-    @pages = Page.all
+    @category = Category.find(params[:category_id])
+    @pages = @category.pages
     @page = Page.new
   end
 
+  def show
+    @category = Category.find(params[:category_id])
+    @page = Page.find(params[:id])
+  end
+
   def create
+    @category = Category.find(params[:category_id])
     @page = Page.create(page_params)
-    redirect_to admin_pages_path
+    render :show
   end
 
   def update
@@ -21,10 +28,11 @@ class Admin::PagesController < AdminController
   end
 
   def destroy
+    @page = Page.find_by(id: params[:id])
     if current_admin.super_admin
-      Page.find_by(id: params[:id]).destroy
+      @page.destroy
     end
-    redirect_to admin_pages_path
+    redirect_to admin_category_pages(@page.category)
   end
 
   private

@@ -1,3 +1,5 @@
+<h1 class="text-center"><%= link_to @external_graph.page.category.name, admin_category_pages_path(@external_graph.page.category) %></h1>
+<h1 class="text-center"><%= link_to @external_graph.page.name, admin_category_page_path(@external_graph.page.category, @external_graph.page) %></h1>
 <h1 class="text-center"><%= "Data for #{@external_graph.title}" %></h1>
 
 <iframe class="iframes" src=<%= @external_graph.external_url %>></iframe>

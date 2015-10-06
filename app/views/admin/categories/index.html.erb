@@ -33,6 +33,7 @@
           <th>Last Updated By</th>
           <th>Created at</th>
           <th>Updated at</th>
+          <th>Manage</th>
           <th>Delete</th>
         </tr>
       </thead>
@@ -45,6 +46,7 @@
             <td><%= category.created_by %></td>
             <td><%= category.created_at %></td>
             <td><%= category.updated_at %></td>
+            <td><%= link_to('Manage', "/admin/categories/#{category.id}/pages") %></td>
             <% if current_admin.super_admin %>
               <td><%= link_to('Destroy', "/admin/categories/#{category.id}", method: :delete, data: { confirm: 'Are you certain you want to delete this category?' }) %></td>
             <% else %>

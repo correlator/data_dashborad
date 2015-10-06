@@ -1,13 +1,13 @@
 <% provide :title, 'Pages' %>
 
-<h1 class="text-center">Manage Pages</h1>
-<h4 class="text-center">These are the pages a user will see.  They appear under the category drop downs.</h4>
+<h1 class="text-center"><%= "Manage #{@category.name} pages" %></h1>
+<h4 class="text-center">Add pages that will appear in the drop down</h4>
 
 <div class="row section-holder">
-  <%= form_for(@page, url: '/admin/pages') do |f| %>
+  <%= form_for(@page, url: admin_category_pages_path(@category)) do |f| %>
     <div class="form-group">
       <%= f.label('Category', class: 'padded-label') %>
-      <%= f.select(:category_id, options_for_select(Category.options_for_select, @page.category_id), required: true) %>
+      <%= f.select(:category_id, options_for_select(Category.options_for_select, params[:category_id])) %>
     </div>
     <div class="form-group">
       <%= f.label('Order', class: 'padded-label') %>
@@ -29,45 +29,45 @@
 
 </br>
 
-<% @categories.each do |category| %>
-  <div class="row section-holder">
-    <div class="col-md-12">
-      <h4><%= "#{category.name} (click to edit)" %></h4>
-      <table class="table table-striped table-bordered">
-        <thead>
+<div class="row section-holder">
+  <div class="col-md-12">
+    <h4><%= "Pages (click to edit)" %></h4>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Name</th>
+          <th>Intro Text</th>
+          <th>Category</th>
+          <th>Last Updated By</th>
+          <th>Created at</th>
+          <th>Updated at</th>
+          <th>Manage</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pages.each do |page| %>
           <tr>
-            <th>Order</th>
-            <th>Name</th>
-            <th>Intro Text</th>
-            <th>Category</th>
-            <th>Last Updated By</th>
-            <th>Created at</th>
-            <th>Updated at</th>
-            <th>Delete</th>
+            <td><%= best_in_place(page, :order, url: admin_category_page_path(page.category, page)) %></td>
+            <td><%= best_in_place(page, :name, url: admin_category_page_path(page.category, page)) %></td>
+            <td><%= best_in_place(page, :intro_text, type: :textarea, url: admin_category_page_path(page.category, page)) %></td>
+            <td><%= best_in_place(page, :category_id, type: :select, collection:  Category.options_for_best_in_place, url: admin_category_page_path(page.category, page)) %></td>
+            <td><%= page.created_by %></td>
+            <td><%= page.created_at %></td>
+            <td><%= page.updated_at %></td>
+            <td><%= link_to('Manage', admin_category_page_path(page.category, page)) %></td>
+            <% if current_admin.super_admin %>
+              <td><%= link_to('Destroy', admin_category_page_path(page.category, page), method: :delete, data: { confirm: 'Are you certain you want to delete this page?' }) %></td>
+            <% else %>
+              <td>Only Super Admins</td>
+            <% end %>
           </tr>
-        </thead>
-        <tbody>
-          <% category.pages.each do |page| %>
-            <tr>
-              <td><%= best_in_place(page, :order, url: "/admin/pages/#{page.id}") %></td>
-              <td><%= best_in_place(page, :name, url: "/admin/pages/#{page.id}") %></td>
-              <td><%= best_in_place(page, :intro_text, type: :textarea, url: "/admin/pages/#{page.id}") %></td>
-              <td><%= best_in_place(page, :category_id, type: :select, collection:  Category.options_for_best_in_place, url: "/admin/pages/#{page.id}") %></td>
-              <td><%= page.created_by %></td>
-              <td><%= page.created_at %></td>
-              <td><%= page.updated_at %></td>
-              <% if current_admin.super_admin %>
-                <td><%= link_to('Destroy', "/admin/pages/#{page.id}", method: :delete, data: { confirm: 'Are you certain you want to delete this page?' }) %></td>
-              <% else %>
-                <td>Only Super Admins</td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-<% end %>
+</div>
 
 
 <script>

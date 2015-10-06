@@ -4,7 +4,7 @@ class Admin::GraphsController < AdminController
 
   def create
     @graph = Graph.create(graph_params)
-    redirect_to admin_graphs_path
+    redirect_to admin_category_page_path(@graph.page.category, @graph.page)
   end
 
   def show
@@ -20,6 +20,14 @@ class Admin::GraphsController < AdminController
         format.json { render json: @graph.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def destroy
+    @graph = Graph.find_by(id: params[:id])
+    if current_admin.super_admin
+      @graph.destroy
+    end
+    redirect_to admin_category_pages_path(@graph.page.category, @graph.page)
   end
 
   private

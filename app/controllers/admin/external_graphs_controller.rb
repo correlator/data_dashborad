@@ -4,7 +4,8 @@ class Admin::ExternalGraphsController < AdminController
 
   def create
     @external_graph = ExternalGraph.create(external_graph_params)
-    redirect_to admin_graphs_path
+    redirect_to admin_category_page_path(@external_graph.page.category,
+                                          @external_graph.page)
   end
 
   def show
@@ -20,6 +21,14 @@ class Admin::ExternalGraphsController < AdminController
         format.json { render json: @external_graph.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def destroy
+    @external_graph = ExternalGraph.find_by(id: params[:id])
+    if current_admin.super_admin
+      @external_graph.destroy
+    end
+    redirect_to admin_category_page_path(@external_graph.page.category, @external_graph.page)
   end
 
   private
