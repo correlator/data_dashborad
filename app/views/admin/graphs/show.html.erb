@@ -5,40 +5,42 @@
 <%= render '/graphs/graph', graph: @graph %>
 
 <% @graph.lines.each do |line| %>
-  <div class="row">
-    <div class= col-md-12>
-      <h3 class="text-center"><%= line.title %></h3>
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>Time</th>
-            <th>Value</th>
-            <th>Notes</th>
-            <th>Updated By</th>
-            <th>Updated at</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% line.points.each do |point| %>
+  <div class="section-holder">
+    <div class="row">
+      <div class= col-md-12>
+        <h3 class="text-center"><%= best_in_place(line, :title, url: admin_category_page_graph_line_path(@graph.page.category, @graph.page, @graph, line)) %></h3>
+        <table class="table table-striped table-bordered">
+          <thead>
             <tr>
-              <td><%= best_in_place(point, :time, url: admin_category_page_graph_point_path(@graph.page.category, @graph.page, @graph, point)) %></td>
-              <td><%= best_in_place(point, :value, url: admin_category_page_graph_point_path(@graph.page.category, @graph.page, @graph, point)) %></td>
-              <td><%= best_in_place(point, :notes, as: :textarea, url: admin_category_page_graph_point_path(@graph.page.category, @graph.page, @graph, point)) %></td>
-              <td><%= point.created_by %></td>
-              <td><%= point.updated_at %></td>
+              <th>Time</th>
+              <th>Value</th>
+              <th>Notes</th>
+              <th>Updated By</th>
+              <th>Updated at</th>
             </tr>
-          <% end %>
-          <tr>
-            <%= form_for(Point.new, url: admin_category_page_graph_points_path(@graph.page.category, @graph.page, @graph)) do |f| %>
-              <%= f.hidden_field :line_id, value: line.id %>
-              <td><%= f.date_field :time, autofocus: true, placeholder: 'Time', class: 'form-control' %></td>
-              <td><%= f.text_field :value, autofocus: true, placeholder: 'Value', class: 'form-control' %></td>
-              <td><%= f.text_area :notes, autofocus: true, placeholder: 'Notes', class: 'form-control' %></td>
-              <td><%= f.submit 'Create Point', class: 'btn btn-success btn-wide', id: 'submit_button' %></td>
+          </thead>
+          <tbody>
+            <% line.points.each do |point| %>
+              <tr>
+                <td><%= best_in_place(point, :time, url: admin_category_page_graph_point_path(@graph.page.category, @graph.page, @graph, point)) %></td>
+                <td><%= best_in_place(point, :value, url: admin_category_page_graph_point_path(@graph.page.category, @graph.page, @graph, point)) %></td>
+                <td><%= best_in_place(point, :notes, as: :textarea, url: admin_category_page_graph_point_path(@graph.page.category, @graph.page, @graph, point)) %></td>
+                <td><%= point.created_by %></td>
+                <td><%= point.updated_at %></td>
+              </tr>
             <% end %>
-          </tr>
-        </tbody>
-      </table>
+            <tr>
+              <%= form_for(Point.new, url: admin_category_page_graph_points_path(@graph.page.category, @graph.page, @graph)) do |f| %>
+                <%= f.hidden_field :line_id, value: line.id %>
+                <td><%= f.date_field :time, autofocus: true, placeholder: 'Time', class: 'form-control' %></td>
+                <td><%= f.text_field :value, autofocus: true, placeholder: 'Value', class: 'form-control' %></td>
+                <td><%= f.text_area :notes, autofocus: true, placeholder: 'Notes', class: 'form-control' %></td>
+                <td><%= f.submit 'Create Point', class: 'btn btn-success btn-wide', id: 'submit_button' %></td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 <% end %>

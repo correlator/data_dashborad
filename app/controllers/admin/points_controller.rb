@@ -1,7 +1,9 @@
 class Admin::PointsController < AdminController
   def create
     @point = Point.create(point_params)
-    redirect_to admin_graph_url(@point.line.graph.id)
+    redirect_to admin_category_page_graph_url(@point.line.graph.page.category,
+                                              @point.line.graph.page,
+                                              @point.line.graph)
   end
 
   def update
