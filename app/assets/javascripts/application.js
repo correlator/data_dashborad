@@ -17,4 +17,5 @@
 //= require best_in_place
 //= require globalize.min.js
 //= require dx.chartjs
+//= require xenon-widgets
 //= require select2
