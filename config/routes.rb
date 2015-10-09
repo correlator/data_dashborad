@@ -8,15 +8,13 @@ Rails.application.routes.draw do
     resources :pages, only: [:show]
 
   namespace :admin do
-    resources :categories do
-      resources :pages do
-        resources :graphs do
-          resources :lines, only: [:update]
-          resources :points, only: [:update, :create, :destroy]
-        end
-        resources :external_graphs, only: [:index, :create, :update, :show, :destroy]
-      end
+    resources :categories
+    resources :pages
+    resources :graphs do
+      resources :lines, only: [:update]
+      resources :points, only: [:update, :create, :destroy]
     end
+    resources :external_graphs, only: [:index, :create, :update, :show, :destroy]
     get '/manage_admins/', to: 'manage_admins#index'
     put '/manage_admins/:id', to: 'manage_admins#update'
     post '/manage_admins', to: 'manage_admins#create'

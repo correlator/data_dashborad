@@ -30,7 +30,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
   describe '#create' do
     before { sign_in admin }
 
-    it 'should return the categories in order when admin is singed in' do
+    it 'should create a category' do
       expect do
         post :create, category: { name: 'First', order: '1', admin_id: admin.id }
       end.to change { Category.count }.by 1

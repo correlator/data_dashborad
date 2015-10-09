@@ -1,6 +1,6 @@
 <% provide :title, @page.name %>
 
-<h1 class="text-center"><%= link_to @category.name, admin_category_pages_path(@category) %></h1>
+<h1 class="text-center"><%= link_to @page.category.name, admin_category_path(@page.category) %></h1>
 <h1 class="text-center"><%= "Manage #{@page.name}" %></h1>
 </br>
 
@@ -62,7 +62,7 @@
   <div class="col-md-6">
     <h2 class="text-center">Internal</h2>
     <p class="text-center">This data is stored in the app and renders a chart on the website.  No external calls are make to display the data</p>
-    <%= form_for(Graph.new, url: admin_category_page_graphs_path(@page.category.id, @page.id)) do |f| %>
+    <%= form_for(Graph.new, url: admin_graphs_path) do |f| %>
       <div class="form-group">
         <%= f.hidden_field(:page_id, value: @page.id) %>
       </div>
@@ -87,7 +87,7 @@
   <div class="col-md-6">
     <h2 class="text-center">External</h2>
     <p class="text-center">Sometimes data is stored and charted in a different program ie Tableau or MapBox.  Paste a link to the graphic you want to include below.</p>
-    <%= form_for(ExternalGraph.new, url: admin_category_page_external_graphs_path(@page.category.id, @page.id)) do |f| %>
+    <%= form_for(ExternalGraph.new, url: admin_external_graphs_path) do |f| %>
       <div class="form-group">
         <%= f.hidden_field(:page_id, value: @page.id) %>
       </div>

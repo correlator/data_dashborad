@@ -1,6 +1,7 @@
 class Category < ActiveRecord::Base
   belongs_to :admin
   has_many :pages
+  default_scope { order(:order) }
 
   def self.options_for_select
     all.map { |category| [category.name, category.id] }

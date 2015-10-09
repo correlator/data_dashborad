@@ -1,17 +1,14 @@
 class Admin::PagesController < AdminController
   def index
-    @category = Category.find(params[:category_id])
     @pages = @category.pages
     @page = Page.new
   end
 
   def show
-    @category = Category.find(params[:category_id])
     @page = Page.find(params[:id])
   end
 
   def create
-    @category = Category.find(params[:category_id])
     @page = Page.create(page_params)
     render :show
   end

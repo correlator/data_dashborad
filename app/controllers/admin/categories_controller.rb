@@ -1,12 +1,16 @@
 class Admin::CategoriesController < AdminController
   def index
-    @categories = Category.all.order(:order)
+    @categories = Category.all
     @category = Category.new
   end
 
   def create
     @category = Category.create(category_params)
     redirect_to admin_categories_path
+  end
+
+  def show
+    @category = Category.find(params[:id])
   end
 
   def update
