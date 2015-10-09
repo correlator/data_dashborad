@@ -30,6 +30,15 @@ describe Category, type: :model do
     end
   end
 
+  context 'scopes' do
+    let(:page) { FactoryGirl.create(:page)}
+    let!(:owned_graph) { Graph.create(title: 'Graphy', page_id: page.id) }
+    it 'should find the orphaned graphs' do
+      expect(Graph.orphaned).to eq [graph]
+    end
+  end
+
+
   context 'data' do
     # create a goal line with 3 values and dates
     # and a data line with 2 values and dates
@@ -50,19 +59,15 @@ describe Category, type: :model do
     let(:graph) { Graph.create(title: 'Text Graph', unit: 'Calls') }
 
     it 'should know its data' do
-      expect(graph.data).to eq(
-        {
-          'Goal' => {
-            times: [goal_point1.time, goal_point2.time, goal_point3.time],
-            values: [goal_point1.value, goal_point2.value, goal_point3.value],
-            unit: 'Calls'
-          },
-          'Data' => {
-            times: [data_point1.time, data_point2.time],
-            values: [data_point1.value, data_point2.value],
-            unit: 'Calls'
+      expect(graph.data).to match_array(
+        [goal_point1, goal_point2, goal_point3, data_point1, data_point2].map do |point|
+          {
+            'dateField' => point.time,
+            'line' => point.line.title,
+            point.line.title => point.value
           }
-        })
+        end
+      )
     end
   end
 end

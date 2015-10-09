@@ -4,32 +4,6 @@
 <h4 class="text-center">Add pages that will appear in the drop down</h4>
 
 <div class="row section-holder">
-  <%= form_for(@page, url: admin_category_pages_path(@category)) do |f| %>
-    <div class="form-group">
-      <%= f.label('Category', class: 'padded-label') %>
-      <%= f.select(:category_id, options_for_select(Category.options_for_select, params[:category_id])) %>
-    </div>
-    <div class="form-group">
-      <%= f.label('Order', class: 'padded-label') %>
-      <%= f.number_field :order, autofocus: true, placeholder: 'Order (1)', class: 'form-control', required: true %>
-    </div>
-    <div class="form-group">
-      <%= f.label('Name', class: 'padded-label') %>
-      <%= f.text_field :name, autofocus: true, placeholder: 'Title for DWP page', class: 'form-control', required: true %>
-    </div>
-    <div class="form-group">
-      <%= f.label('Introductary text', class: 'padded-label') %>
-      <%= f.text_area :intro_text, autofocus: true, placeholder: 'Short description of page...', class: 'form-control', required: true %>
-    </div>
-    <div class="form-group">
-      <%= f.submit 'Create Page', class: 'btn btn-success btn-wide', id: 'submit_button' %>
-    </div>
-  <% end%>
-</div>
-
-</br>
-
-<div class="row section-holder">
   <div class="col-md-12">
     <h4><%= "Pages (click to edit)" %></h4>
     <table class="table table-striped table-bordered">
@@ -67,6 +41,32 @@
       </tbody>
     </table>
   </div>
+</div>
+
+</br>
+
+<div class="row section-holder">
+  <%= form_for(@page, url: admin_category_pages_path(@category)) do |f| %>
+    <div class="form-group">
+      <%= f.label('Category', class: 'padded-label') %>
+      <%= f.select(:category_id, options_for_select(Category.options_for_select, params[:category_id])) %>
+    </div>
+    <div class="form-group">
+      <%= f.label('Order', class: 'padded-label') %>
+      <%= f.number_field :order, autofocus: true, placeholder: 'Order (1)', class: 'form-control', required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label('Name', class: 'padded-label') %>
+      <%= f.text_field :name, autofocus: true, placeholder: 'Title for DWP page', class: 'form-control', required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.label('Introductary text', class: 'padded-label') %>
+      <%= f.text_area :intro_text, autofocus: true, placeholder: 'Short description of page...', class: 'form-control', required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.submit 'Create Page', class: 'btn btn-success btn-wide', id: 'submit_button' %>
+    </div>
+  <% end%>
 </div>
 
 

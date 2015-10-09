@@ -3,6 +3,9 @@ class Graph < ActiveRecord::Base
   has_many :lines
   after_create :set_lines
   belongs_to :page
+  scope :orphaned, -> do
+    where("page_id not in (#{Page.pluck(:id).join(',')}) OR page_id IS NULL")
+  end
 
   def data
     data = []
