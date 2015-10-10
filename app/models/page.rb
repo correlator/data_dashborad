@@ -5,6 +5,9 @@ class Page < ActiveRecord::Base
   has_many :external_graphs
   validates_uniqueness_of :landing_page, :if => :landing_page
   default_scope { order(:order) }
+  scope :orphaned, -> do
+    where("category_id not in (#{Category.pluck(:id).join(',')}) OR category_id IS NULL")
+  end
 
   def self.options_for_select
     all.map { |page| [page.name, page.id] }

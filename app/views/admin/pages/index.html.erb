@@ -1,7 +1,6 @@
 <% provide :title, 'Pages' %>
 
-<h1 class="text-center"><%= "Manage #{@category.name} pages" %></h1>
-<h4 class="text-center">Add pages that will appear in the drop down</h4>
+<h1 class="text-center">Pages without a category</h1>
 
 <div class="row section-holder">
   <div class="col-md-12">
@@ -23,16 +22,16 @@
       <tbody>
         <% @pages.each do |page| %>
           <tr>
-            <td><%= best_in_place(page, :order, url: admin_category_page_path(page.category, page)) %></td>
-            <td><%= best_in_place(page, :name, url: admin_category_page_path(page.category, page)) %></td>
-            <td><%= best_in_place(page, :intro_text, type: :textarea, url: admin_category_page_path(page.category, page)) %></td>
-            <td><%= best_in_place(page, :category_id, type: :select, collection:  Category.options_for_best_in_place, url: admin_category_page_path(page.category, page)) %></td>
+            <td><%= best_in_place(page, :order, url: admin_page_path(page)) %></td>
+            <td><%= best_in_place(page, :name, url: admin_page_path(page)) %></td>
+            <td><%= best_in_place(page, :intro_text, type: :textarea, url: admin_page_path(page)) %></td>
+            <td><%= best_in_place(page, :category_id, type: :select, collection:  Category.options_for_best_in_place, url: admin_page_path(page)) %></td>
             <td><%= page.created_by %></td>
             <td><%= page.created_at %></td>
             <td><%= page.updated_at %></td>
-            <td><%= link_to('Manage', admin_category_page_path(page.category, page)) %></td>
+            <td><%= link_to('Manage', admin_page_path(page)) %></td>
             <% if current_admin.super_admin %>
-              <td><%= link_to('Destroy', admin_category_page_path(page.category, page), method: :delete, data: { confirm: 'Are you certain you want to delete this page?' }) %></td>
+              <td><%= link_to('Destroy', admin_page_path(page), method: :delete, data: { confirm: 'Are you certain you want to delete this page?' }) %></td>
             <% else %>
               <td>Only Super Admins</td>
             <% end %>
@@ -46,10 +45,10 @@
 </br>
 
 <div class="row section-holder">
-  <%= form_for(@page, url: admin_category_pages_path(@category)) do |f| %>
+  <%= form_for(Page.new, url: admin_pages_path) do |f| %>
     <div class="form-group">
       <%= f.label('Category', class: 'padded-label') %>
-      <%= f.select(:category_id, options_for_select(Category.options_for_select, params[:category_id])) %>
+      <%= f.select(:category_id, options_for_select(Category.options_for_select)) %>
     </div>
     <div class="form-group">
       <%= f.label('Order', class: 'padded-label') %>

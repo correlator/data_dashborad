@@ -1,5 +1,9 @@
-<h1 class="text-center"><%= link_to @graph.page.category.name, admin_category_pages_path(@graph.page.category) %></h1>
-<h1 class="text-center"><%= link_to @graph.page.name, admin_category_page_path(@graph.page.category, @graph.page) %></h1>
+<% if @graph.page.present? %>
+  <h1 class="text-center"><%= link_to @graph.page.category.name, admin_category_pages_path(@graph.page.category) %></h1>
+  <h1 class="text-center"><%= link_to @graph.page.name, admin_category_page_path(@graph.page.category, @graph.page) %></h1>
+<% else %>
+  <h1 class="text-center"><%= link_to 'Unassigned Graphs', admin_graphs_path %></h1>
+<% end %>
 <h1 class="text-center"><%= "Data for #{@graph.title}" %></h1>
 
 <%= render '/graphs/graph', graph: @graph %>
@@ -8,7 +12,7 @@
   <div class="section-holder">
     <div class="row">
       <div class= col-md-12>
-        <h3 class="text-center"><%= best_in_place(line, :title, url: admin_category_page_graph_line_path(@graph.page.category, @graph.page, @graph, line)) %></h3>
+        <h3 class="text-center"><%= best_in_place(line, :title, url: admin_graph_line_path(@graph, line)) %></h3>
         <table class="table table-striped table-bordered">
           <thead>
             <tr>
@@ -22,15 +26,15 @@
           <tbody>
             <% line.points.each do |point| %>
               <tr>
-                <td><%= best_in_place(point, :time, url: admin_category_page_graph_point_path(@graph.page.category, @graph.page, @graph, point)) %></td>
-                <td><%= best_in_place(point, :value, url: admin_category_page_graph_point_path(@graph.page.category, @graph.page, @graph, point)) %></td>
-                <td><%= best_in_place(point, :notes, as: :textarea, url: admin_category_page_graph_point_path(@graph.page.category, @graph.page, @graph, point)) %></td>
+                <td><%= best_in_place(point, :time, url: admin_graph_point_path(@graph, point)) %></td>
+                <td><%= best_in_place(point, :value, url: admin_graph_point_path(@graph, point)) %></td>
+                <td><%= best_in_place(point, :notes, as: :textarea, url: admin_graph_point_path(@graph, point)) %></td>
                 <td><%= point.created_by %></td>
                 <td><%= point.updated_at %></td>
               </tr>
             <% end %>
             <tr>
-              <%= form_for(Point.new, url: admin_category_page_graph_points_path(@graph.page.category, @graph.page, @graph)) do |f| %>
+              <%= form_for(Point.new, url: admin_graph_points_path(@graph)) do |f| %>
                 <%= f.hidden_field :line_id, value: line.id %>
                 <td><%= f.date_field :time, autofocus: true, placeholder: 'Time', class: 'form-control' %></td>
                 <td><%= f.text_field :value, autofocus: true, placeholder: 'Value', class: 'form-control' %></td>

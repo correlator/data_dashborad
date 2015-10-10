@@ -1,7 +1,6 @@
 class Admin::PagesController < AdminController
   def index
-    @pages = @category.pages
-    @page = Page.new
+    @pages = Page.orphaned
   end
 
   def show
