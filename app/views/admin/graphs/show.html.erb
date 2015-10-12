@@ -1,6 +1,6 @@
 <% if @graph.page.present? %>
-  <h1 class="text-center"><%= link_to @graph.page.category.name, admin_category_pages_path(@graph.page.category) %></h1>
-  <h1 class="text-center"><%= link_to @graph.page.name, admin_category_page_path(@graph.page.category, @graph.page) %></h1>
+  <h1 class="text-center"><%= link_to @graph.page.category.name, admin_category_path(@graph.page.category) %></h1>
+  <h1 class="text-center"><%= link_to @graph.page.name, admin_page_path(@graph.page) %></h1>
 <% else %>
   <h1 class="text-center"><%= link_to 'Unassigned Graphs', admin_graphs_path %></h1>
 <% end %>
