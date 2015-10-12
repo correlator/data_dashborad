@@ -1,0 +1,23 @@
+<h2 class="text-center">External</h2>
+<p class="text-center">Sometimes data is stored and charted in a different program ie Tableau or MapBox.  Paste a link to the graphic you want to include below.</p>
+<%= form_for(ExternalGraph.new, url: admin_external_graphs_path) do |f| %>
+  <div class="form-group">
+    <%= f.label('Page', class: 'padded-label') %>
+    <%= f.select(:page_id, options_for_select(Page.options_for_select), required: true) %>
+  </div>
+  <div class="form-group">
+    <%= f.label('Order', class: 'padded-label') %>
+    <%= f.number_field :order, autofocus: true, placeholder: 'Order (1)', class: 'form-control', required: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label('Title', class: 'padded-label') %>
+    <%= f.text_field :title, autofocus: true, placeholder: 'Title for graph', class: 'form-control', required: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label('Url', class: 'padded-label') %>
+    <%= f.text_field :external_url, autofocus: true, placeholder: 'https://www.link_to_chart.com', class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Create External Graph', class: 'btn btn-success btn-wide', id: 'submit_button' %>
+  </div>
+<% end%>

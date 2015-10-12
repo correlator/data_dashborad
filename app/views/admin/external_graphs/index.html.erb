@@ -1,4 +1,4 @@
-<% provide :title, 'Internal Graphs' %>
+<% provide :title, 'External Graphs' %>
 
 <h1 class="text-center">Internal Graphs Without a Page</h1>
 
@@ -10,7 +10,7 @@
         <tr>
           <th>Order</th>
           <th>Title</th>
-          <th>Unit</th>
+          <th>Url</th>
           <th>Page</th>
           <th>Actions</th>
         </tr>
@@ -18,9 +18,9 @@
       <tbody>
         <% @graphs.each do |graph| %>
           <tr>
-            <td><%= best_in_place(graph, :order, url: "/admin/graphs/#{graph.id}") %></td>
-            <td><%= best_in_place(graph, :title, url: "/admin/graphs/#{graph.id}") %></td>
-            <td><%= best_in_place(graph, :unit, url: "/admin/graphs/#{graph.id}") %></td>
+            <td><%= best_in_place(graph, :order, url: "/admin/external_graphs/#{graph.id}") %></td>
+            <td><%= best_in_place(graph, :title, url: "/admin/external_graphs/#{graph.id}") %></td>
+            <td><%= best_in_place(graph, :url, url: "/admin/external_graphs/#{graph.id}") %></td>
             <td><%= best_in_place(graph, :page_id, type: :select, collection:  Page.options_for_best_in_place, url: "/admin/graphs/#{graph.id}") %></td>
             <td><%= link_to 'Edit data', "/admin/graphs/#{graph.id}" %>
           </tr>
@@ -32,13 +32,14 @@
 
 <div class="row section-holder">
   <div class="col-md-6 col-md-offset-3">
-    <%= render '/admin/graphs/form' %>
+    <%= render '/admin/external_graphs/form' %>
   </div>
 </div>
 
 
 <script>
   $(document).ready(function() {
+    $("#graph_page_id").select2({});
     $("#external_graph_page_id").select2({});
     jQuery(".best_in_place").best_in_place();
   });
