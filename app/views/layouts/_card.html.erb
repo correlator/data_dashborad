@@ -22,7 +22,7 @@
 
     <div class="xe-lower xe-right">
       <strong>
-        <%= link_to('Source', card.source) if card.source %> | 
+        <%= link_to('Source', card.source) if card.source.present? %> | 
         <%= card.trend %>
       </strong>
 
