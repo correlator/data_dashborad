@@ -15,6 +15,14 @@ class Admin::PointsController < AdminController
     end
   end
 
+  def destroy
+    @point = Point.find_by(id: params[:id])
+    if current_admin.super_admin
+      @point.destroy
+    end
+    redirect_to admin_graph_url(@point.line.graph)
+  end
+
   private
 
   def point_params

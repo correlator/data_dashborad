@@ -21,6 +21,7 @@
               <th>Notes</th>
               <th>Updated By</th>
               <th>Updated at</th>
+              <th>Destroy</th>
             </tr>
           </thead>
           <tbody>
@@ -31,6 +32,11 @@
                 <td><%= best_in_place(point, :notes, as: :textarea, url: admin_graph_point_path(@graph, point)) %></td>
                 <td><%= point.created_by %></td>
                 <td><%= point.updated_at %></td>
+                <% if current_admin.super_admin %>
+                  <td><%= link_to('Destroy', admin_graph_point_path(@graph, point), method: :delete, data: { confirm: 'Are you certain you want to delete this point?' }) %></td>
+                <% else %>
+                  <td>Only Super Admins</td>
+                <% end %>
               </tr>
             <% end %>
             <tr>
