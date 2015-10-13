@@ -14,14 +14,14 @@ RSpec.describe Admin::PagesController, type: :controller do
 
   describe '#index' do
     before do
-      page1
+      page1.update(category_id: 0)
       page2
     end
 
-    it 'should return the pages when admin is singed in' do
+    it 'should return the orphaned pages when admin is singed in' do
       sign_in admin
-      get admin_category_pages_path
-      expect(assigns(:pages)).to match_array [page1, page2]
+      get :index
+      expect(assigns(:pages)).to match_array [page1]
     end
 
     it 'should redirect to root when admin is singed out' do
@@ -41,11 +41,11 @@ RSpec.describe Admin::PagesController, type: :controller do
       end.to change { Page.count }.by 1
     end
 
-    it 'should redirect to page index' do
+    it 'should render the page that was just created' do
       post :create, page: { name: 'First',
                             category_id: category.id,
                             admin_id: admin.id }
-      expect(response).to redirect_to(admin_pages_path)
+      expect(response).to render_template(:show)
     end
   end
 end
