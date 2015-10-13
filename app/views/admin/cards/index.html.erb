@@ -1,0 +1,64 @@
+<h1 class="text-center">Cards Without a Page</h1>
+<div class="row section-holder">
+  <div class="col-md-12">
+    <h4>Cards (click to edit)</h4>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Title</th>
+          <th>Page</th>
+          <th>Updated By</th>
+          <th>Updated At</th>
+          <th>Manage</th>
+          <th>Destroy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cards.each do |card| %>
+          <tr>
+            <td><%= best_in_place(card, :order, url: admin_card_path(card)) %></td>
+            <td><%= best_in_place(card, :title, url: admin_card_path(card)) %></td>
+            <td><%= best_in_place(card, :page_id, type: :select, collection:  Page.options_for_best_in_place, url: admin_card_path(card)) %></td>
+            <td> <%= card.admin.email %></td>
+            <td> <%= card.updated_at %></td>
+            <td><%= link_to('Manage', admin_card_path(card)) %></td>
+            <% if current_admin.super_admin %>
+              <td><%= link_to('Destroy', admin_card_path(card), method: :delete, data: { confirm: 'Are you certain you want to delete this card?' }) %></td>
+            <% else %>
+              <td>Only Super Admins</td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row section-holder">
+  <div class="col-md-6 col-md-offset-3">
+    <h2 class="text-center">Add Cards</h2>
+    <p class="text-center">Create colorful cards for the dashboard.</p>
+    <%= form_for(Card.new, url: admin_cards_path) do |f| %>
+      <div class="form-group">
+        <%= f.label('Page', class: 'padded-label') %>
+        <%= f.select(:page_id, options_for_select(Page.options_for_select), required: true) %>
+      </div>
+      <div class="form-group">
+        <%= f.label('Order', class: 'padded-label') %>
+        <%= f.number_field :order, autofocus: true, placeholder: 'Order (1)', class: 'form-control', required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label('Title', class: 'padded-label') %>
+        <%= f.text_field :title, autofocus: true, placeholder: 'Title for graph', class: 'form-control', required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.submit 'Update Card', class: 'btn btn-success btn-wide', id: 'submit_button', required: true %>
+      </div>
+    <% end%>
+  </div>
+</div>
+
+<script>
+    $("#card_page_id").select2({});
+</script>
