@@ -5,7 +5,7 @@ class Admin::CardsController < AdminController
 
   def create
     @card = Card.create(card_params)
-    redirect_to admin_page_path(@card.page)
+    redirect_to "#{admin_page_path(@card.page)}#manage-cards"
   end
 
   def show
@@ -31,7 +31,7 @@ class Admin::CardsController < AdminController
       @card.destroy
     end
     if @card.page
-      redirect_to admin_page_path(@card.page)
+      redirect_to "#{admin_page_path(@card.page)}#manage-cards"
     else
       redirect_to admin_cards_path
     end
