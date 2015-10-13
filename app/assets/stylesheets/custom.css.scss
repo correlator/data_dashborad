@@ -96,3 +96,7 @@ body {
   left: -10% !important;
   bottom: auto !important;
 }
+
+.xe-widget.xe-counter, .xe-widget.xe-counter-block .xe-upper, .xe-widget.xe-progress-counter .xe-upper {
+  padding: 0px !important;
+}
