@@ -30,7 +30,11 @@ class Admin::CardsController < AdminController
     if current_admin.super_admin
       @card.destroy
     end
-    redirect_to admin_pages_path(@card.page)
+    if @card.page
+      redirect_to admin_page_path(@card.page)
+    else
+      redirect_to admin_cards_path
+    end
   end
 
   private
