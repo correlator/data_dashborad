@@ -38,7 +38,8 @@ class Admin::CardsController < AdminController
   def card_params
     ps = params.require(:card)
                .permit(:order, :title, :goal, :goal_date, :value, :value_date,
-                       :source, :trend, :icon, :page_id, :color)
+                       :source, :trend, :icon, :page_id, :color,
+                       :percentage_complete)
     ps[:admin_id] = current_admin.id
     ps
   end

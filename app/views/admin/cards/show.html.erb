@@ -47,6 +47,10 @@
           </div>
         </div>
         <div class="form-group">
+          <%= f.label('Percantge of goal completed:', class: 'padded-label') %>
+          <%= f.number_field :percentage_complete, autofocus: true, class: 'form-control' %>
+        </div>
+        <div class="form-group">
           <%= f.label('Source must start with http://', class: 'padded-label') %>
           <%= f.text_field :source, autofocus: true, placeholder: 'url for data source', class: 'form-control' %>
         </div>
