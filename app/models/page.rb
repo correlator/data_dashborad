@@ -3,6 +3,7 @@ class Page < ActiveRecord::Base
   belongs_to :admin
   has_many :graphs
   has_many :external_graphs
+  has_many :cards
   validates_uniqueness_of :landing_page, :if => :landing_page
   default_scope { order(:order) }
   scope :orphaned, -> do

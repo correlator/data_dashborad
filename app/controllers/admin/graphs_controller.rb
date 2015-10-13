@@ -5,7 +5,7 @@ class Admin::GraphsController < AdminController
 
   def create
     @graph = Graph.create(graph_params)
-    redirect_to admin_category_page_path(@graph.page.category, @graph.page)
+    redirect_to admin_page_path(@graph.page)
   end
 
   def show
@@ -28,7 +28,7 @@ class Admin::GraphsController < AdminController
     if current_admin.super_admin
       @graph.destroy
     end
-    redirect_to admin_category_pages_path(@graph.page.category, @graph.page)
+    redirect_to admin_pages_path(@graph.page)
   end
 
   private

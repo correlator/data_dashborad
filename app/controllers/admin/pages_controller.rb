@@ -28,7 +28,11 @@ class Admin::PagesController < AdminController
     if current_admin.super_admin
       @page.destroy
     end
-    redirect_to admin_category_pages(@page.category)
+    if @page.category
+      redirect_to admin_category_path(@page.category)
+    else
+      redirect_to admin_pages_path
+    end
   end
 
   private

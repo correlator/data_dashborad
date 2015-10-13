@@ -7,6 +7,12 @@
   </div>
 </div>
 
+<div class="row">
+  <% @page.cards.each do |card| %>
+    <%= render '/layouts/card', card: card %>
+  <% end %>
+</div>
+
 <% @page.contents.each do |graph| %>
   <% if graph.class == Graph %>
     <%= render '/graphs/graph', graph: graph %>

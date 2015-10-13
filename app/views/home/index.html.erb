@@ -7,41 +7,11 @@
   </div>
 </div>
 
-<div class="row" data-equalizer>
-
-          <div class="col-sm-4">
-
-            <div class="xe-widget xe-progress-counter xe-progress-counter-blue">
-
-              <div class="xe-background">
-                <i class="glyphicon glyphicon-user"></i>
-              </div>
-
-              <div class="xe-upper">
-                <div class="xe-icon">
-                  <i class="glyphicon glyphicon-user"></i>
-                </div>
-                <div class="xe-label">
-                  <span>This string should be showing up</span>
-                  <strong class="num">20</strong>
-                </div>
-              </div>
-
-              <div class="xe-progress">
-                <span class="xe-progress-fill" data-fill-to="0" data-fill-unit="%" length data-fill-duration="3" data-fill-easing="true" style="width: 15%;"></span>
-              </div>
-
-              <div class="xe-lower xe-right">
-                <strong><a href="#"><i class="glyphicon glyphicon-check"></i></a>
-                  <a href="#"><i class="glyphicon glyphicon-map-marker"></i> </a>
-                  One | Two: Three
-                </strong>
-
-              </div>
-              <div class="label label-default">Goal:GOALLLLL</div>
-            </div>
-          </div>
-        </div>
+<div class="row">
+  <% @page.cards.each do |card| %>
+    <%= render '/layouts/card', card: card %>
+  <% end %>
+</div>
 
 
 <% @page.contents.each do |graph| %>

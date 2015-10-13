@@ -44,6 +44,10 @@ body {
   border-style: solid;
 }
 
+.xe-upper {
+  padding-top: 10px;
+}
+
 .xe-right {
   text-align: right;
   a {
@@ -51,3 +55,38 @@ body {
   }
 }
 
+.xe-widget.xe-progress-counter.xe-progress-counter-grey {
+  background: #999999;
+  .xe-upper {
+    background: transparent;
+  }
+  a {
+    color: #397FDB;
+  }
+}
+
+.xe-widget.xe-progress-counter.xe-progress-counter-green {
+  background: #68b828;
+  .xe-upper {
+    background: transparent;
+  }
+  a {
+    color: #7828B8;
+  }
+}
+
+.xe-widget.xe-progress-counter.xe-progress-counter-red {
+  background: #d5080f;
+  .xe-upper {
+    background: transparent;
+  }
+  a {
+    color: #08D5CE;
+  }
+}
+
+.xe-label {
+  strong {
+    font-size: 1.5em;
+  }
+}
