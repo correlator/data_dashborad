@@ -29,7 +29,7 @@ class Admin::ExternalGraphsController < AdminController
     if current_admin.super_admin
       @external_graph.destroy
     end
-    redirect_to admin_category_page_path(@external_graph.page.category, @external_graph.page)
+    redirect_to admin_page_path(@external_graph.page)
   end
 
   private
