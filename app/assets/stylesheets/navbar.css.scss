@@ -24,6 +24,8 @@
   margin-top: 3px;
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
+@media screen and (min-width: 775px) {
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
 }
