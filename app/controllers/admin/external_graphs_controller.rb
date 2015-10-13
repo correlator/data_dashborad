@@ -5,8 +5,7 @@ class Admin::ExternalGraphsController < AdminController
 
   def create
     @external_graph = ExternalGraph.create(external_graph_params)
-    redirect_to admin_category_page_path(@external_graph.page.category,
-                                          @external_graph.page)
+    redirect_to admin_page_path(@external_graph.page)
   end
 
   def show
