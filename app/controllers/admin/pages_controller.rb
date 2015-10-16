@@ -4,7 +4,11 @@ class Admin::PagesController < AdminController
   end
 
   def show
-    @page = Page.find(params[:id])
+    if params[:landing] == 'landing'
+      @page = Page.where(landing_page: true).first
+    else
+      @page = Page.find(params[:id])
+    end
   end
 
   def create

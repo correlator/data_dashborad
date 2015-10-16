@@ -1,6 +1,6 @@
 <% provide :title, @page.name %>
 
-<h1 class="text-center"><%= link_to @page.category.name, admin_category_path(@page.category) %></h1>
+<h1 class="text-center"><%= link_to @page.category.name, admin_category_path(@page.category) if @page.category %></h1>
 <h1 class="text-center"><%= "Manage #{@page.name}" %></h1>
 </br>
 
