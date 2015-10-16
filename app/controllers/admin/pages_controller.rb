@@ -29,7 +29,7 @@ class Admin::PagesController < AdminController
 
   def destroy
     @page = Page.find_by(id: params[:id])
-    if current_admin.super_admin
+    if current_admin.super_admin && !@page.landing_page
       @page.destroy
     end
     if @page.category
