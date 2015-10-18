@@ -1,5 +1,9 @@
-<h1 class="text-center"><%= link_to @card.page.category.name, admin_category_path(@card.page.category) %></h1>
-<h1 class="text-center"><%= link_to @card.page.name, admin_page_path(@card.page) %></h1>
+<% if @card.page && @card.page.category %>
+  <h1 class="text-center"><%= link_to @card.page.category.name, admin_category_path(@card.page.category) %></h1>
+<% end %>
+<% if @card.page %>
+  <h1 class="text-center"><%= link_to @card.page.name, admin_page_path(@card.page) %></h1>
+<% end %>
 
 <div class="row section-holder">
   <h1 class="text-center"><%= "Manage #{@card.title}" %></h1>
