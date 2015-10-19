@@ -5,6 +5,6 @@
   <h1 class="text-center"><%= link_to @external_graph.page.name, admin_page_path(@external_graph.page) %></h1>
 <% end %>
 
-<h1 class="text-center"><%= "Data for #{@external_graph.title}" %></h1>
+<h1 class="text-center"><%= "Preview of #{@external_graph.title}" %></h1>
 
 <iframe class="iframes" src=<%= @external_graph.external_url %>></iframe>
