@@ -8,4 +8,6 @@ class Admin < ActiveRecord::Base
   has_many :pages
   has_many :points
   has_many :cards
+  has_many :graphs
+  has_many :external_graphs
 end

@@ -38,7 +38,9 @@ class Admin::GraphsController < AdminController
   private
 
   def graph_params
-    params.require(:graph)
+    ps = params.require(:graph)
           .permit(:order, :title, :unit, :page_id)
+    ps[:admin_id] = current_admin.id
+    ps
   end
 end

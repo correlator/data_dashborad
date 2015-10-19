@@ -38,7 +38,9 @@ class Admin::ExternalGraphsController < AdminController
   private
 
   def external_graph_params
-    params.require(:external_graph)
+    ps = params.require(:external_graph)
           .permit(:order, :title, :external_url, :page_id)
+    ps[:admin_id] = current_admin.id
+    ps
   end
 end

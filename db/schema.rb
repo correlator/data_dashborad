@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151013014148) do
+ActiveRecord::Schema.define(version: 20151019180639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20151013014148) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
-    t.integer  "order",      default: 10
+    t.integer  "order"
     t.integer  "admin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20151013014148) do
   create_table "external_graphs", force: :cascade do |t|
     t.integer  "admin_id"
     t.integer  "page_id"
-    t.integer  "order",        default: 10
+    t.integer  "order"
     t.string   "title"
     t.string   "external_url"
     t.datetime "created_at"
@@ -73,10 +73,13 @@ ActiveRecord::Schema.define(version: 20151013014148) do
   end
 
   create_table "graphs", force: :cascade do |t|
-    t.string  "title"
-    t.string  "unit"
-    t.integer "page_id"
-    t.integer "order",   default: 10
+    t.string   "title"
+    t.string   "unit"
+    t.integer  "page_id"
+    t.integer  "order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "admin_id"
   end
 
   add_index "graphs", ["title"], name: "index_graphs_on_title", unique: true, using: :btree
@@ -91,7 +94,7 @@ ActiveRecord::Schema.define(version: 20151013014148) do
     t.text     "intro_text"
     t.integer  "category_id"
     t.integer  "admin_id"
-    t.integer  "order",        default: 10
+    t.integer  "order"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "landing_page"

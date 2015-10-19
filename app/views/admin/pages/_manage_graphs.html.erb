@@ -9,6 +9,8 @@
           <th>Unit</th>
           <th>Url</th>
           <th>Page</th>
+          <th>Updated By</th>
+          <th>Updated at</th>
           <th>Manage</th>
           <th>Destroy</th>
         </tr>
@@ -22,6 +24,8 @@
               <td><%= best_in_place(graph, :unit, url: admin_graph_path(graph)) %></td>
               <td></td>
               <td><%= best_in_place(graph, :page_id, type: :select, collection:  Page.options_for_best_in_place, url: admin_graph_path(graph)) %></td>
+              <td><%= graph.created_by %></td>
+              <td><%= graph.updated_at %></td>
               <td><%= link_to('Manage', admin_graph_path(graph)) %></td>
               <% if current_admin.super_admin %>
                 <td><%= link_to('Destroy', admin_graph_path(graph), method: :delete, data: { confirm: 'Are you certain you want to delete this page?' }) %></td>
@@ -36,6 +40,8 @@
               <td></td>
               <td><%= best_in_place(graph, :external_url, url: admin_external_graph_path(graph)) %></td>
               <td><%= best_in_place(graph, :page_id, type: :select, collection:  Page.options_for_best_in_place, url: admin_external_graph_path(graph)) %></td>
+              <td><%= graph.created_by %></td>
+              <td><%= graph.updated_at %></td>
               <td><%= link_to('Manage', admin_external_graph_path(graph)) %></td>
               <% if current_admin.super_admin %>
                 <td><%= link_to('Destroy', admin_external_graph_path(graph), method: :delete, data: { confirm: 'Are you certain you want to delete this page?' }) %></td>
