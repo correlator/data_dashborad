@@ -100,3 +100,8 @@ body {
 .xe-widget.xe-counter, .xe-widget.xe-counter-block .xe-upper, .xe-widget.xe-progress-counter .xe-upper {
   padding: 0px !important;
 }
+
+.table {
+  table-layout: fixed;
+  word-wrap: break-word;
+}
