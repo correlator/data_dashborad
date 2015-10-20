@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019180639) do
+ActiveRecord::Schema.define(version: 20151020160545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 20151019180639) do
     t.integer  "percentage_complete", default: 0
   end
 
+  add_index "cards", ["page_id"], name: "index_cards_on_page_id", using: :btree
+
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.integer  "order"
@@ -72,6 +74,8 @@ ActiveRecord::Schema.define(version: 20151019180639) do
     t.datetime "updated_at"
   end
 
+  add_index "external_graphs", ["page_id"], name: "index_external_graphs_on_page_id", using: :btree
+
   create_table "graphs", force: :cascade do |t|
     t.string   "title"
     t.string   "unit"
@@ -82,12 +86,15 @@ ActiveRecord::Schema.define(version: 20151019180639) do
     t.integer  "admin_id"
   end
 
+  add_index "graphs", ["page_id"], name: "index_graphs_on_page_id", using: :btree
   add_index "graphs", ["title"], name: "index_graphs_on_title", unique: true, using: :btree
 
   create_table "lines", force: :cascade do |t|
     t.string  "title"
     t.integer "graph_id"
   end
+
+  add_index "lines", ["graph_id"], name: "index_lines_on_graph_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
     t.string   "name"
@@ -109,5 +116,7 @@ ActiveRecord::Schema.define(version: 20151019180639) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "points", ["line_id"], name: "index_points_on_line_id", using: :btree
 
 end
