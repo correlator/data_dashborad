@@ -13,6 +13,8 @@ gem 'jquery-rails'
 gem 'puma'
 gem 'best_in_place', '3.0.3'
 
+gem 'rollbar'
+
 gem 'devise'
 
 group :production do
