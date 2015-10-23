@@ -25,4 +25,12 @@ class Card < ActiveRecord::Base
        fa-trash fa-tree fa-trophy fa-truck fa-tv fa-umbrella fa-university fa-user fa-users
        fa-video-camera fa-wheelchair fa-wifi fa-wrench)
   end
+
+  def goal_statement
+    if goal_date.present?
+      "GOAL: #{goal} by #{goal_date}"
+    else
+      "GOAL: #{goal}"
+    end
+  end
 end
