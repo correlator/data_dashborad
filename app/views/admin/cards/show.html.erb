@@ -32,7 +32,7 @@
           <div class="col-sm-6">
             <div class="form-group">
               <%= f.label('Date of Current Value', class: 'padded-label') %>
-              <%= f.date_field :value_date, autofocus: true, class: 'form-control', required: true %>
+              <%= f.text_field :value_date, autofocus: true, class: 'form-control', required: true %>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
           <div class="col-sm-6">
             <div class="form-group">
               <%= f.label('Goal Deadline', class: 'padded-label') %>
-              <%= f.date_field :goal_date, autofocus: true, class: 'form-control' %>
+              <%= f.text_field :goal_date, autofocus: true, class: 'form-control' %>
             </div>
           </div>
         </div>
