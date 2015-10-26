@@ -25,23 +25,31 @@ body {
   width: 100% !important;
 }
 
-.iframe-holder {
+.iframe-container {
   background-color: #fff;
   padding-top: 10px;
+  height: 400px;
+  width: 95%;
+}
+.iframe-holder {
   margin-bottom: 20px;
+  height: 100%;
+  position: relative;
   h2 {
     font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', 'Verdana';
     font-weight: 200;
     font-size: 28px;
   }
-}
-
-.iframes {
-  width: 95%;
-  height: 400px;
-  margin: 2.5%;
-  border-width: 1px;
-  border-style: solid;
+  .iframes {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 95%;
+    height: 60%;
+    margin: 2.5%;
+    border-width: 1px;
+    border-style: solid;
+  }
 }
 
 .xe-upper {
