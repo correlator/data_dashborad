@@ -17,8 +17,9 @@
   <% if graph.class == Graph %>
     <%= render '/graphs/graph', graph: graph %>
   <% else %>
-    <div class="iframe-holder">
+    <div class="iframe-container">
       <h2 class="text-center"><%= graph.title %></h2>
+      <div class="iframe-holder">
       <iframe class="iframes" src=<%= graph.external_url %>></iframe>
     </div>
   <% end %>
