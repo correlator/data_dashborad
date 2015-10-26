@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/datepicker
 //= require bootstrap
 //= require best_in_place
+//= require best_in_place.jquery-ui
 //= require globalize.min.js
 //= require dx.chartjs
 //= require xenon-widgets

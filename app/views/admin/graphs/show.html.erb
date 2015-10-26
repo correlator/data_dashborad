@@ -27,7 +27,7 @@
           <tbody>
             <% line.points.each do |point| %>
               <tr>
-                <td><%= best_in_place(point, :time, url: admin_graph_point_path(@graph, point)) %></td>
+                <td><%= best_in_place(point, :time, :as => :date, url: admin_graph_point_path(@graph, point)) %></td>
                 <td><%= best_in_place(point, :value, url: admin_graph_point_path(@graph, point)) %></td>
                 <td><%= best_in_place(point, :notes, as: :textarea, url: admin_graph_point_path(@graph, point)) %></td>
                 <td><%= point.created_by %></td>
@@ -42,7 +42,7 @@
             <tr>
               <%= form_for(Point.new, url: admin_graph_points_path(@graph)) do |f| %>
                 <%= f.hidden_field :line_id, value: line.id %>
-                <td><%= f.date_field :time, autofocus: true, placeholder: 'Time', class: 'form-control' %></td>
+                <td><%= f.text_field :time, placeholder: 'Time', class: 'form-control datepicker', id: "#{line.id}-date-field" %></td>
                 <td><%= f.text_field :value, autofocus: true, placeholder: 'Value', class: 'form-control' %></td>
                 <td><%= f.text_area :notes, autofocus: true, placeholder: 'Notes', class: 'form-control' %></td>
                 <td><%= f.submit 'Create Point', class: 'btn btn-success btn-wide', id: 'submit_button' %></td>
@@ -57,6 +57,12 @@
 
 <script>
   $(document).ready(function() {
+    $.datepicker.setDefaults({
+      dateFormat: 'yy-mm-dd'
+    });
     jQuery(".best_in_place").best_in_place();
+    $.each($(".datepicker"), function( index, value ) {
+      $(value).datepicker();
+      });
   });
 </script>
