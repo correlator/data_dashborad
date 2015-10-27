@@ -9,7 +9,7 @@
           return;
           var dataSource = [];
           $(<%= raw graph.data.to_json %>).each(function(index, value ){
-            point = { dateField: new Date(value.dateField) }
+            point = { dateField:  value.dateField }
             point[value.line] = value[value.line]
             dataSource.push(point);
           });
