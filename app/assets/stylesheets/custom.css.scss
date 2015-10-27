@@ -26,6 +26,7 @@ body {
 
 .iframe-wrapper {
   -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
 }
 
 .iframes {
