@@ -14,6 +14,8 @@ class Admin::ExternalGraphsController < AdminController
 
   def update
     @external_graph = ExternalGraph.find(params[:id])
+    puts params
+    puts external_graph_params
     respond_to do |format|
       if @external_graph.update(external_graph_params)
         format.json { render json: @external_graph }
