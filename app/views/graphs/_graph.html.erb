@@ -1,55 +1,55 @@
 <div class="col-sm-12">
 
-  <script type="text/javascript">
-  jQuery(document).ready(function($)
-  {
-    if( ! $.isFunction($.fn.dxChart))
-      return;
-      var dataSource = [];
-      $(<%= raw graph.data.to_json %>).each(function(index, value ){
-        point = { dateField: new Date(value.dateField) }
-        point[value.line] = value[value.line]
-        dataSource.push(point);
-      });
+      <script type="text/javascript">
+      jQuery(document).ready(function($)
+      {
+        if( ! $.isFunction($.fn.dxChart))
+          return;
+          var dataSource = [];
+          $(<%= raw graph.data.to_json %>).each(function(index, value ){
+            point = { dateField:  value.dateField }
+            point[value.line] = value[value.line]
+            dataSource.push(point);
+          });
 
-      var seriesData = [];
-      $(<%= raw graph.lines.to_json %>).each(function(index, value ){
-        point = { valueField: value.title, name: value.title }
-        seriesData.push(point);
-      });
-      $("<%= "#bar-#{graph.id}" %>").dxChart({
-      dataSource: dataSource,
-      commonSeriesSettings: {
-        argumentField: "dateField"
-      },
-      argumentAxis: {
-        argumentType: 'datetime'
-      },
-      series: seriesData,
+        var seriesData = [];
+        $(<%= raw graph.lines.to_json %>).each(function(index, value ){
+          point = { valueField: value.title, name: value.title }
+          seriesData.push(point);
+        });
+        $("<%= "#bar-#{graph.id}" %>").dxChart({
+        dataSource: dataSource,
+        commonSeriesSettings: {
+          argumentField: "dateField"
+        },
+        argumentAxis: {
+          argumentType: 'datetime'
+        },
+        series: seriesData,
 
-      valueAxis: {
-        title: "<%= graph.unit %>"
-      },
+        valueAxis: {
+          title: "<%= graph.unit %>"
+        },
 
 
-      argumentAxis:{
-        grid:{
-          visible: true
-        }
-      },
-      tooltip:{
-        enabled: true
-      },
-      title: "<%= graph.title %>",
-      legend: {
-        verticalAlignment: "bottom",
-        horizontalAlignment: "center"
-      },
-      commonPaneSettings: {
-        border:{
-          visible: true,
-          right: false
-        }
+        argumentAxis:{
+          grid:{
+            visible: true
+          }
+        },
+        tooltip:{
+          enabled: true
+        },
+        title: "<%= graph.title %>",
+        legend: {
+          verticalAlignment: "bottom",
+          horizontalAlignment: "center"
+        },
+        commonPaneSettings: {
+          border:{
+            visible: true,
+            right: false
+          }
       }
     });
   });

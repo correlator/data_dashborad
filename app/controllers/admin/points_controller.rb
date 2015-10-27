@@ -27,7 +27,7 @@ class Admin::PointsController < AdminController
 
   def point_params
     ps = params.require(:point)
-               .permit(:time, :value, :notes, :line_id)
+               .permit(:time, :value, :notes, :line_id, :position)
     ps[:admin_id] = current_admin.id
     ps
   end

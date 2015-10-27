@@ -13,10 +13,16 @@
   <% end %>
 </div>
 
-<% @page.contents.each do |graph| %>
-  <% if graph.class == Graph %>
-    <%= render '/graphs/graph', graph: graph %>
-  <% else %>
-    <%= render '/external_graphs/external_graph', graph: graph %>
-  <% end %>
-<% end %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <% @page.contents.each do |graph| %>
+        <% if graph.class == Graph %>
+          <%= render '/graphs/graph', graph: graph %>
+        <% else %>
+          <%= render '/external_graphs/external_graph', graph: graph %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

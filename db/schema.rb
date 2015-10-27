@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024023125) do
+ActiveRecord::Schema.define(version: 20151027203405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,12 +109,13 @@ ActiveRecord::Schema.define(version: 20151024023125) do
 
   create_table "points", force: :cascade do |t|
     t.float    "value"
-    t.date     "time"
     t.text     "notes"
     t.integer  "line_id"
     t.integer  "admin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "time"
+    t.integer  "position"
   end
 
   add_index "points", ["line_id"], name: "index_points_on_line_id", using: :btree
