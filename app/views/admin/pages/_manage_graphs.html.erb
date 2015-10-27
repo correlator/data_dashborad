@@ -6,6 +6,7 @@
         <tr>
           <th>Order</th>
           <th>Title</th>
+          <th>Width</th>
           <th>Unit</th>
           <th>Url</th>
           <th>Page</th>
@@ -21,6 +22,7 @@
             <tr>
               <td><%= best_in_place(graph, :order, url: admin_graph_path(graph)) %></td>
               <td><%= best_in_place(graph, :title, url: admin_graph_path(graph)) %></td>
+              <td><%= best_in_place(graph, :width, type: :select, collection:  { '12': 'Full', '6': 'Half', '4': 'Third', '3': 'Quarter' }, url: admin_graph_path(graph)) %></td>
               <td><%= best_in_place(graph, :unit, url: admin_graph_path(graph)) %></td>
               <td></td>
               <td><%= best_in_place(graph, :page_id, type: :select, collection:  Page.options_for_best_in_place, url: admin_graph_path(graph)) %></td>
@@ -37,6 +39,7 @@
             <tr>
               <td><%= best_in_place(graph, :order, url: admin_external_graph_path(graph)) %></td>
               <td><%= best_in_place(graph, :title, url: admin_external_graph_path(graph)) %></td>
+              <td><%= best_in_place(graph, :width, type: :select, collection:  { '12': 'Full', '6': 'Half', '4': 'Third', '3': 'Quarter' }, url: admin_graph_path(graph)) %></td>
               <td></td>
               <td><%= best_in_place(graph, :external_url, url: admin_external_graph_path(graph)) %></td>
               <td><%= best_in_place(graph, :page_id, type: :select, collection:  Page.options_for_best_in_place, url: admin_external_graph_path(graph)) %></td>

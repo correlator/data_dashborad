@@ -7,4 +7,40 @@
 
 <h1 class="text-center"><%= "Preview of #{@external_graph.title}" %></h1>
 
-<iframe class="iframes" src=<%= @external_graph.external_url %>></iframe>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <%= render '/external_graphs/external_graph', graph: @external_graph %>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h4>Edit</h4>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Width</th>
+          <th>Url</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= best_in_place(@external_graph, :title, url: admin_external_graph_path(@external_graph)) %></td>
+          <td><%= best_in_place(@external_graph, :width, type: :select, collection:  { '12': 'Full', '6': 'Half', '4': 'Third', '3': 'Quarter' }, url: admin_external_graph_path(@external_graph)) %></td>
+          <td><%= best_in_place(@external_graph, :external_url, url: admin_external_graph_path(@external_graph)) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+    jQuery(".best_in_place").best_in_place();
+  });
+  $('.best_in_place').bind("ajax:success", function(){
+    location.reload();
+  });
+</script>

@@ -1,5 +1,6 @@
 class Graph < ActiveRecord::Base
   validates :title, uniqueness: true
+  validates :width, :inclusion => { :in => [12, 6, 4, 3] }
   has_many :lines
   after_create :set_lines
   belongs_to :page

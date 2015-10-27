@@ -1,5 +1,6 @@
 class ExternalGraph < ActiveRecord::Base
   validates :title, uniqueness: true
+  validates :width, :inclusion => { :in => [12, 6, 4, 3] }
   belongs_to :page
   belongs_to :admin
   scope :orphaned, -> do
