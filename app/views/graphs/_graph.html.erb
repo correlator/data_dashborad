@@ -1,36 +1,41 @@
 <div class="col-sm-12">
+  <script type="text/javascript">
+    jQuery(document).ready(function($) {
+      if( ! $.isFunction($.fn.dxChart)) {
+        return;
+      }
 
-      <script type="text/javascript">
-      jQuery(document).ready(function($)
-      {
-        if( ! $.isFunction($.fn.dxChart))
-          return;
-          var dataSource = [];
-          $(<%= raw graph.data.to_json %>).each(function(index, value ){
-            point = { dateField:  value.dateField }
-            point[value.line] = value[value.line]
-            dataSource.push(point);
-          });
+      var dataSource = [];
+      $(<%= raw graph.data.to_json %>).each(function(index, value ){
+        point = { dateField:  value.dateField }
+        point[value.line] = value[value.line]
+        dataSource.push(point);
+      });
+      console.log(dataSource);
 
-        var seriesData = [];
-        $(<%= raw graph.lines.to_json %>).each(function(index, value ){
-          point = { valueField: value.title, name: value.title }
-          seriesData.push(point);
-        });
-        $("<%= "#bar-#{graph.id}" %>").dxChart({
+      var seriesData = [];
+      $(<%= raw graph.lines.to_json %>).each(function(index, value ){
+        point = { valueField: value.title, name: value.title }
+        seriesData.push(point);
+      });
+
+     console.log(seriesData);
+
+      $("<%= "#bar-#{graph.id}" %>").dxChart({
         dataSource: dataSource,
         commonSeriesSettings: {
           argumentField: "dateField"
         },
         argumentAxis: {
-          argumentType: 'datetime'
+          grid:{
+          visible: true
+          }
         },
         series: seriesData,
 
         valueAxis: {
           title: "<%= graph.unit %>"
         },
-
 
         argumentAxis:{
           grid:{
@@ -48,11 +53,10 @@
         commonPaneSettings: {
           border:{
             visible: true,
-            right: false
           }
-      }
+        }
+      });
     });
-  });
   </script>
   <div id=<%= "bar-#{graph.id}" %> style="height: 250px; width: 100%;"></div>
 </div>
