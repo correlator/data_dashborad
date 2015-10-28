@@ -21,7 +21,7 @@
     </div>
     <div class="col-md-3">
       <h4>
-        <%= best_in_place(@graph, :style, type: :select, collection:  { 'spline': 'spline', 'bar': 'bar' }, url: admin_graph_path(@graph)) %>
+        <%= best_in_place(@graph, :style, type: :select, collection:  { 'spline': 'spline', 'bar': 'bar' }, url: admin_graph_path(@graph), id: 'graph_style_selector') %>
       </h4>
     </div>
   </div>
@@ -82,7 +82,7 @@
   $(document).ready(function() {
     jQuery(".best_in_place").best_in_place();
   });
-  $('.best_in_place').bind("ajax:success", function(){
+  $('#graph_style_selector').bind("ajax:success", function(){
     location.reload();
   });
 </script>
