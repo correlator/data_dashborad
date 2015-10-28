@@ -6,7 +6,27 @@
 <% end %>
 <h1 class="text-center"><%= "Data for #{@graph.title}" %></h1>
 
-<%= render '/graphs/graph', graph: @graph %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <%= render '/graphs/graph', graph: @graph %>
+    </div>
+  </div>
+</div>
+
+<div class="section-holder">
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3">
+      <h4 class="text-right">Choose Graph Style:</h4>
+    </div>
+    <div class="col-md-3">
+      <h4>
+        <%= best_in_place(@graph, :style, type: :select, collection:  { 'spline': 'spline', 'bar': 'bar' }, url: admin_graph_path(@graph)) %>
+      </h4>
+    </div>
+  </div>
+</div>
+
 
 <% @graph.lines.each do |line| %>
   <div class="section-holder">
@@ -61,5 +81,8 @@
 <script>
   $(document).ready(function() {
     jQuery(".best_in_place").best_in_place();
+  });
+  $('.best_in_place').bind("ajax:success", function(){
+    location.reload();
   });
 </script>

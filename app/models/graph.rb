@@ -1,6 +1,7 @@
 class Graph < ActiveRecord::Base
   validates :title, uniqueness: true
   validates :width, :inclusion => { :in => [12, 6, 4, 3] }
+  validates :style, :inclusion => { :in => ['spline', 'bar'] }
   has_many :lines
   after_create :set_lines
   belongs_to :page
@@ -15,10 +16,20 @@ class Graph < ActiveRecord::Base
       line.points.each do |point|
         data << { 'dateField' => point.time,
                   'line' => line.title,
+                  'style' => style,
                   line.title => point.value }
       end
     end
     data
+  end
+
+  def line_data
+    lines.map do |line|
+      {
+        'title' => line.title,
+        'style' => style,
+      }
+    end
   end
 
   def created_by

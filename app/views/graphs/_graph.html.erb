@@ -11,15 +11,14 @@
         point[value.line] = value[value.line]
         dataSource.push(point);
       });
-      console.log(dataSource);
 
       var seriesData = [];
-      $(<%= raw graph.lines.to_json %>).each(function(index, value ){
-        point = { valueField: value.title, name: value.title }
+      $(<%= raw graph.line_data.to_json %>).each(function(index, value ){
+        point = { valueField: value.title, name: value.title, type: value.style }
+        console.log(value)
         seriesData.push(point);
       });
 
-     console.log(seriesData);
 
       $("<%= "#bar-#{graph.id}" %>").dxChart({
         dataSource: dataSource,
