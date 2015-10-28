@@ -33,10 +33,15 @@ body {
 }
 
 .iframe-wrapper {
-  overflow:scroll !important;
+  overflow:auto !important;
   -webkit-overflow-scrolling:touch !important;
   overflow: hidden;
 }
+
+::-webkit-scrollbar {
+      -webkit-appearance: none;
+          width: 7px;
+        }
 
 .iframes {
   width: 100%;
