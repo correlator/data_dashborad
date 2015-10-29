@@ -1,8 +1,8 @@
-<% if @graph.page.present? %>
+<% if @graph.page && @graph.page.category %>
   <h1 class="text-center"><%= link_to @graph.page.category.name, admin_category_path(@graph.page.category) %></h1>
+<% end %>
+<% if @graph.page %>
   <h1 class="text-center"><%= link_to @graph.page.name, admin_page_path(@graph.page) %></h1>
-<% else %>
-  <h1 class="text-center"><%= link_to 'Unassigned Graphs', admin_graphs_path %></h1>
 <% end %>
 <h1 class="text-center"><%= "Data for #{@graph.title}" %></h1>
 

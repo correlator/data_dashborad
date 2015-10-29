@@ -15,6 +15,7 @@ gem 'best_in_place', '3.0.3'
 gem 'jquery-ui-rails'
 
 gem 'rollbar'
+gem 'newrelic_rpm'
 
 gem 'devise'
 
