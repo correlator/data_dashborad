@@ -64,6 +64,7 @@ describe Category, type: :model do
           {
             'dateField' => point.time,
             'line' => point.line.title,
+            'style' => 'spline',
             point.line.title => point.value
           }
         end
