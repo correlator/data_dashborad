@@ -4,11 +4,11 @@ class Category < ActiveRecord::Base
   default_scope { order(:order) }
 
   def self.options_for_select
-    all.map { |category| [category.name, category.id] }
+    all.map { |category| [category.name, category.id] } << ['None', 0]
   end
 
   def self.options_for_best_in_place
-    all.map { |category| [category.id, category.name] }
+    all.map { |category| [category.id, category.name] } << [0, 'None']
   end
 
   def created_by
