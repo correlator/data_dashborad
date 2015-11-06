@@ -31,7 +31,6 @@ class Admin::CategoriesController < AdminController
     redirect_to admin_categories_path
   end
 
-
   private
 
   def category_params

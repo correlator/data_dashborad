@@ -57,6 +57,10 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
+  # static cache control
+  config.serve_static_assets = true
+  config.static_cache_control = "public, max-age=172800"
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
 
