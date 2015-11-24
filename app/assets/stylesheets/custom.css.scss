@@ -1,12 +1,19 @@
 @import "bootstrap-sprockets";
 @import "bootstrap"; 
+
 body {
   background-color: rgb(238, 238, 238);
-  font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+  font-family: 'ProximaNovaCond-Regular';
+}
+@font-face {
+  font-family: 'ProximaNovaCond-Regular';
+  src:url('ProximaNovaCond-Regular.otf');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .graph-title {
-  font-family:'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+  font-family:'ProximaNovaCond-Regular';
   font-weight:200;
   fill:#232323;
   font-size:28px;cursor:default;
