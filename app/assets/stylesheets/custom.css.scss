@@ -1,15 +1,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap"; 
 
+@font-face {
+  font-family: 'ProximaNovaCond-Regular';
+  src: font-url('ProximaNovaCond-Regular.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   background-color: rgb(238, 238, 238);
   font-family: 'ProximaNovaCond-Regular';
-}
-@font-face {
-  font-family: 'ProximaNovaCond-Regular';
-  src:url('ProximaNovaCond-Regular.otf');
-  font-weight: normal;
-  font-style: normal;
 }
 
 .graph-title {
