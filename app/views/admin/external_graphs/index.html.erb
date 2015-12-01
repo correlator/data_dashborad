@@ -20,7 +20,7 @@
           <tr>
             <td><%= best_in_place(graph, :order, url: "/admin/external_graphs/#{graph.id}") %></td>
             <td><%= best_in_place(graph, :title, url: "/admin/external_graphs/#{graph.id}") %></td>
-            <td><%= best_in_place(graph, :url, url: "/admin/external_graphs/#{graph.id}") %></td>
+            <td><%= best_in_place(graph, :external_url, url: "/admin/external_graphs/#{graph.id}") %></td>
             <td><%= best_in_place(graph, :page_id, type: :select, collection:  Page.options_for_best_in_place, url: "/admin/graphs/#{graph.id}") %></td>
             <td><%= link_to 'Edit data', "/admin/graphs/#{graph.id}" %>
           </tr>
