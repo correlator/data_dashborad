@@ -28,7 +28,7 @@ class Admin::PointsController < AdminController
   def point_params
     ps = params.require(:point)
                .permit(:time, :value, :notes, :line_id, :position)
-    ps[:value] = ps[:value].gsub(',', '')
+    ps[:value] = ps[:value].to_s.gsub(',', '')
     ps[:admin_id] = current_admin.id
     ps
   end
