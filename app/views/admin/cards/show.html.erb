@@ -12,7 +12,7 @@
       <%= form_for(@card, url: admin_card_path(@card)) do |f| %>
         <div class="form-group">
           <%= f.label('Color', class: 'padded-label') %>
-          <%= f.select(:color, options_for_select(%w(green red grey), @card.color), required: true) %>
+          <%= f.select(:color, options_for_select(%w(green red blue), @card.color), required: true) %>
         </div>
         <div class="form-group">
           <%= f.label('Icon', class: 'padded-label') %>
