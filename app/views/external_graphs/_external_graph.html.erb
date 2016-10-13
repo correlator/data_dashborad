@@ -1,7 +1,8 @@
 <div class=<%= "col-sm-#{graph.width}" %>>
   <h2 class="text-center graph-title"><%= graph.title %></h2>
   <div class="iframe-wrapper">
-    <iframe class="iframes" src=<%= graph.external_url %>></iframe>
+
+    <iframe class="iframes" src="<%= graph.external_url %>" style="height:<%= graph.height %>px !important"></iframe>
   </div>
 </div>
 

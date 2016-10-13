@@ -23,6 +23,7 @@
         <tr>
           <th>Title</th>
           <th>Width</th>
+          <th>Height</th>
           <th>Url</th>
         </tr>
       </thead>
@@ -30,6 +31,7 @@
         <tr>
           <td><%= best_in_place(@external_graph, :title, url: admin_external_graph_path(@external_graph)) %></td>
           <td><%= best_in_place(@external_graph, :width, type: :select, collection:  { '12': 'Full', '6': 'Half', '4': 'Third', '3': 'Quarter' }, url: admin_external_graph_path(@external_graph)) %></td>
+          <td><%= best_in_place(@external_graph, :height, url: admin_external_graph_path(@external_graph)) %></td>
           <td><%= best_in_place(@external_graph, :external_url, url: admin_external_graph_path(@external_graph)) %></td>
         </tr>
       </tbody>

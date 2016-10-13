@@ -18,6 +18,10 @@
     <%= f.text_field :external_url, autofocus: true, placeholder: 'https://www.link_to_chart.com', class: 'form-control' %>
   </div>
   <div class="form-group">
+    <%= f.label('Height', class: 'padded-label') %>
+    <%= f.number_field :height, autofocus: true, placeholder: '400', class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= f.submit 'Create External Graph', class: 'btn btn-success btn-wide', id: 'submit_button' %>
   </div>
 <% end%>
