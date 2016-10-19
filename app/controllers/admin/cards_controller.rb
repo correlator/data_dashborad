@@ -1,6 +1,6 @@
 class Admin::CardsController < AdminController
   def index
-    @cards = Card.orphaned
+    @cards = Card.all
   end
 
   def create
