@@ -2,49 +2,26 @@
 
 <h1 class="text-center">Manage Categories</h1>
 
-<div class="row section-holder">
-  <%= form_for(@category, url: admin_categories_path, html: { class: 'form-inline text-center' }) do |f| %>
-      <%= f.hidden_field :admin_id, value: current_admin.id %>
-    <div class="form-group col-md-4">
-      <%= f.label('Name', class: 'sr-only') %>
-      <%= f.text_field :name, autofocus: true, placeholder: 'Category name (MOCS)', class: 'form-control', required: true %>
+<div class="row">
+    <div class="col-md-3 col-md-offset-3">
+      <%= form_for Category.new, url: admin_categories_url(format: :js), remote: true, authenticity_token: true do |f| %>
+        <%= f.hidden_field :admin_id, value: current_admin.id %>
+        <%= f.hidden_field :name, value: "New Category" %>
+        <%= f.submit 'Create Category', class: 'btn btn-primary btn-wide' %>
+      <% end %>
     </div>
-    <div class="form-group col-md-4">
-      <%= f.label('Order', class: 'sr-only') %>
-      <%= f.number_field :order, autofocus: true, placeholder: 'Order (1)', class: 'form-control', required: true %>
+    <div class="col-md-3">
+      <%= form_for Page.new(), url: admin_pages_url(format: :js), remote: true, authenticity_token: true do |f| %>
+        <%= f.submit 'Create Page', class: 'btn btn-info btn-wide' %>
+      <% end %>
     </div>
-    <div class="form-group col-md-4">
-      <%= f.submit 'Create Category', class: 'btn btn-success btn-wide', id: 'submit_button' %>
-    </div>
-  <% end%>
 </div>
 
 </br>
 
 <ul class="section-holder sortable-category">
   <% @categories.each do |category| %>
-    <li class="panel panel-info" data-url="<%= admin_reorder_url %>" data-id="<%= category.id %>" >
-      <div class="panel-heading">
-        <%= category.name %>
-      </div>
-      <div class="panel-body">
-        <ul class="category-page-list sortable-page" data-url="<%= admin_category_url(category) %>" data-id="<%= category.id%>">
-          <% category.pages.each do |page| %>
-            <li id="page-listitem-<%= page.id %>" data-id=<%= page.id %>>
-              <div class="page-listitem sort-container">
-                <i class="fa fa-sort" aria-hidden="true"></i>
-              </div>
-              <div class="page-listitem name-container">
-                <%= page.name %>
-              </div>
-              <div class="page-listitem actions-container">
-                Manage Delete
-              </div>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </li>
+    <%= render '/admin/categories/panel', category: category %>
   <% end %>
 </ul>
 

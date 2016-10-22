@@ -6,7 +6,10 @@ class Admin::CategoriesController < AdminController
 
   def create
     @category = Category.create(category_params)
-    redirect_to admin_categories_path
+    respond_to do |format|
+      format.js
+      format.html { redirect_to admin_categories_path }
+    end
   end
 
   def show
@@ -52,6 +55,7 @@ class Admin::CategoriesController < AdminController
   def update_category
     @category.update(category_params)
     update_pages if category_params[:pages]
+    true
   end
 
   def update_pages

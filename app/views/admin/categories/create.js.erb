@@ -1,0 +1,21 @@
+var list = $(".sortable-category")
+var html = "<%= j render '/admin/categories/panel', category: @category %>"
+
+list.append(html);
+jQuery(".best_in_place").best_in_place();
+
+$(".sortable-page").sortable({
+  connectWith: ".sortable-page",
+  update: function(event, ui) {
+    var params = {};
+    params['pages'] = $.map($(event.target).children('li'), function(n) { return $(n).data('id')});
+    var categoryUrl = $(event.target).data('url');
+    $.ajax({
+      data: { category: params },
+      url: categoryUrl,
+      type: 'PUT',
+      success: function(response) {
+      }
+    });
+  }
+});

@@ -1,0 +1,25 @@
+<li class="panel panel-info" data-url="<%= admin_reorder_url %>" data-id="<%= category.id %>" >
+  <div class="panel-heading">
+    <%= best_in_place category, :name, url: admin_category_url(category) %> &nbsp
+    <%= link_to admin_category_url(category), data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'text-right' do %>
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    <% end %>
+  </div>
+  <div class="panel-body">
+    <ul class="category-page-list sortable-page" data-url="<%= admin_category_url(category) %>" data-id="<%= category.id%>">
+      <% category.pages.each do |page| %>
+        <li id="page-listitem-<%= page.id %>" data-id=<%= page.id %>>
+          <div class="page-listitem sort-container">
+            &nbsp<i class="fa fa-sort" aria-hidden="true"></i>
+          </div>
+          <div class="page-listitem name-container">
+            <%= best_in_place page, :name, url: admin_page_url(page) %>
+          </div>
+          <div class="page-listitem actions-container">
+            Manage Delete
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</li>
