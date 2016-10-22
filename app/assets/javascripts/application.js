@@ -11,8 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require jquery-ui/datepicker
+//= require jquery-ui
 //= require bootstrap
 //= require best_in_place
 //= require best_in_place.jquery-ui

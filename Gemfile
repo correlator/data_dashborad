@@ -12,7 +12,6 @@ gem "bootstrap-sass"
 gem 'jquery-rails'
 gem 'puma'
 gem 'best_in_place'
-gem 'jquery-ui-rails'
 
 gem 'rollbar'
 gem 'newrelic_rpm'

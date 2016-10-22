@@ -1,7 +1,6 @@
 <% provide :title, 'Categories' %>
 
 <h1 class="text-center">Manage Categories</h1>
-<h4 class="text-center">These are the main navigation tabs a user will see.  They will have dropdowns which link to pages</h4>
 
 <div class="row section-holder">
   <%= form_for(@category, url: admin_categories_path, html: { class: 'form-inline text-center' }) do |f| %>
@@ -22,46 +21,71 @@
 
 </br>
 
-<div class="row section-holder">
-  <div class="col-md-12">
-    <h4>Categories (click to edit)</h4>
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Order</th>
-          <th>Name</th>
-          <th>Last Updated By</th>
-          <th>Created at</th>
-          <th>Updated at</th>
-          <th>Manage</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @categories.each do |category| %>
-          <% next if category.name == 'Hidden Category' %>
-          <tr>
-            <td><%= best_in_place(category, :order, url: admin_category_path(category)) %></td>
-            <td><%= best_in_place(category, :name, url: admin_category_path(category)) %></td>
-            <td><%= category.created_by %></td>
-            <td><%= category.created_at %></td>
-            <td><%= category.updated_at %></td>
-            <td><%= link_to('Manage', admin_category_path(category)) %></td>
-            <% if current_admin.super_admin %>
-              <td><%= link_to('Destroy', admin_category_path(category), method: :delete, data: { confirm: 'Are you certain you want to delete this category?' }) %></td>
-            <% else %>
-              <td>Only Super Admins</td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-
+<ul class="section-holder sortable-category">
+  <% @categories.each do |category| %>
+    <li class="panel panel-info" data-url="<%= admin_reorder_url %>" data-id="<%= category.id %>" >
+      <div class="panel-heading">
+        <%= category.name %>
+      </div>
+      <div class="panel-body">
+        <ul class="category-page-list sortable-page" data-url="<%= admin_category_url(category) %>" data-id="<%= category.id%>">
+          <% category.pages.each do |page| %>
+            <li id="page-listitem-<%= page.id %>" data-id=<%= page.id %>>
+              <div class="page-listitem sort-container">
+                <i class="fa fa-sort" aria-hidden="true"></i>
+              </div>
+              <div class="page-listitem name-container">
+                <%= page.name %>
+              </div>
+              <div class="page-listitem actions-container">
+                Manage Delete
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </li>
+  <% end %>
+</ul>
 
 <script>
   $(document).ready(function() {
     jQuery(".best_in_place").best_in_place();
+    $(".sortable-page").sortable({
+      connectWith: ".sortable-page",
+      update: function(event, ui) {
+        var params = {};
+        params['pages'] = $.map($(event.target).children('li'), function(n) { return $(n).data('id')});
+        var categoryUrl = $(event.target).data('url');
+        $.ajax({
+          data: { category: params },
+          url: categoryUrl,
+          type: 'PUT',
+          success: function(response) {
+          }
+        });
+      }
+    });
+
+    $(".sortable-category").sortable({
+      revert: 'invalid',
+      placeholder: 'placeholder',
+      forceHelperSize: true,
+      start: function( event, ui ) {
+        ui.placeholder.height(ui.item.height())
+        ui.placeholder.width(ui.item.width())
+      },
+      update: function(event, ui) {
+        var categoryIds = $.map($(event.target).children('li'), function(n) { return $(n).data('id')});
+        var categoryUrl = $(event.target).data('url');
+        $.ajax({
+          data: { category_ids: categoryIds },
+          url: '/admin/reorder',
+          type: 'PUT',
+          success: function(response) {
+          }
+        });
+      }
+    });
   });
 </script>

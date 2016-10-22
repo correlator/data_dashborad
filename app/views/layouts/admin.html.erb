@@ -25,6 +25,11 @@
           $(this).delay(5000).fadeOut(1000);
         });
       });
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
     </script>
   </body>
 </html>
