@@ -1,6 +1,8 @@
 class Card < ActiveRecord::Base
   belongs_to :admin
-  belongs_to :page
+  has_many :contents
+  has_many :pages, through: :contents
+
   default_scope { order(:order) }
   scope :orphaned, -> do
     where("page_id not in (#{Page.pluck(:id).join(',')}) OR page_id IS NULL")

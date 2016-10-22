@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.2.3"
+ruby "2.3.1"
 
 gem 'rails', '4.2.4'
 gem 'pg'
@@ -11,7 +11,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem "bootstrap-sass"
 gem 'jquery-rails'
 gem 'puma'
-gem 'best_in_place', '3.0.3'
+gem 'best_in_place'
 gem 'jquery-ui-rails'
 
 gem 'rollbar'

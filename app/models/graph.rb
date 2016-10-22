@@ -6,6 +6,10 @@ class Graph < ActiveRecord::Base
   after_create :set_lines
   belongs_to :page
   belongs_to :admin
+  has_many :contents
+  has_many :pages, through: :contents
+
+
   scope :orphaned, -> do
     where("page_id not in (#{Page.pluck(:id).join(',')}) OR page_id IS NULL")
   end
