@@ -11,7 +11,11 @@ Rails.application.routes.draw do
     resources :categories
     put '/reorder', to: 'categories#reorder'
 
-    resources :pages
+    resources :content
+
+    resources :pages do
+      put '/reorder', to: 'pages#reorder'
+    end
     resources :graphs do
       resources :lines, only: [:update]
       resources :points, only: [:update, :create, :destroy]

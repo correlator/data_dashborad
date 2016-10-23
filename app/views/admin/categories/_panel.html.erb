@@ -6,19 +6,9 @@
     <% end %>
   </div>
   <div class="panel-body">
-    <ul class="category-page-list sortable-page" data-url="<%= admin_category_url(category) %>" data-id="<%= category.id%>">
+    <ul class="category-page-list sortable-page" id="category-page-list-<%= category.id %>" data-url="<%= admin_category_url(category) %>" data-id="<%= category.id%>">
       <% category.pages.each do |page| %>
-        <li id="page-listitem-<%= page.id %>" data-id=<%= page.id %>>
-          <div class="page-listitem sort-container">
-            &nbsp<i class="fa fa-sort" aria-hidden="true"></i>
-          </div>
-          <div class="page-listitem name-container">
-            <%= best_in_place page, :name, url: admin_page_url(page) %>
-          </div>
-          <div class="page-listitem actions-container">
-            Manage Delete
-          </div>
-        </li>
+        <%= render '/admin/pages/panel_row', page: page %>
       <% end %>
     </ul>
   </div>

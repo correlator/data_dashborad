@@ -135,3 +135,17 @@ body {
   table-layout: fixed;
   word-wrap: break-word;
 }
+
+.dataTables_filter {
+  text-align: left !important;
+  label {
+    width: 80% !important;
+  }
+  input {
+    width: 100%;
+  }
+}
+
+.table-striped > tbody > tr:nth-of-type(even) {
+  background-color: #fff;
+}

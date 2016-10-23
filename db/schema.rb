@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20161022004036) do
     t.integer  "page_id"
     t.string   "content_type"
     t.integer  "content_id"
+    t.integer  "order"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -13,7 +13,10 @@ class Admin::PagesController < AdminController
 
   def create
     @page = Page.create(page_params)
-    render :show
+    respond_to do |format|
+      format.js
+      format.html { redirect_to admin_categories_path }
+    end
   end
 
   def update
@@ -32,10 +35,15 @@ class Admin::PagesController < AdminController
     if current_admin.super_admin && !@page.landing_page
       @page.destroy
     end
-    if @page.category
-      redirect_to admin_category_path(@page.category)
-    else
-      redirect_to admin_pages_path
+    redirect_to admin_categories_path
+  end
+
+  def reorder
+    params[:content_ids].each_with_index do |content_id, index|
+      Content.where(id: content_id).update_all(order: index)
+    end
+    respond_to do |format|
+      format.json { render json: true }
     end
   end
 

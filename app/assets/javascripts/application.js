@@ -19,4 +19,5 @@
 //= require globalize.min.js
 //= require dx.chartjs
 //= require xenon-widgets
+//= require datatables
 //= require select2

@@ -11,8 +11,11 @@
       <% end %>
     </div>
     <div class="col-md-3">
-      <%= form_for Page.new(), url: admin_pages_url(format: :js), remote: true, authenticity_token: true do |f| %>
+      <%= form_for Page.new, url: admin_pages_url(format: :js), remote: true, authenticity_token: true do |f| %>
         <%= f.submit 'Create Page', class: 'btn btn-info btn-wide' %>
+        <%= f.hidden_field :admin_id, value: current_admin.id %>
+        <%= f.hidden_field :category_id, value: @categories.first.id %>
+        <%= f.hidden_field :name, value: "New Page" %>
       <% end %>
     </div>
 </div>

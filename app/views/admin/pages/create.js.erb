@@ -1,0 +1,5 @@
+var list = $("#category-page-list-<%= @page.category.id %>")
+var html = "<%= j render '/admin/pages/panel_row', page: @page %>"
+
+list.append(html);
+jQuery(".best_in_place").best_in_place();

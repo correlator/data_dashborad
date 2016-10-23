@@ -8,21 +8,16 @@
   </div>
 </div>
 
-<div class="row">
-  <% @page.cards.each do |card| %>
-    <%= render '/layouts/card', card: card %>
-  <% end %>
-</div>
-
-
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="row">
-      <% @page.contents.each do |graph| %>
-        <% if graph.class == Graph %>
-          <%= render '/graphs/graph', graph: graph %>
+      <% @page.contents.each do |content| %>
+        <% if content.content_type == "Graph" %>
+          <%= render '/graphs/graph', graph: content.content %>
+        <% elsif content.content_type == "Card" %>
+          <%= render '/layouts/card', card: content.content %>
         <% else %>
-          <%= render '/external_graphs/external_graph', graph: graph %>
+          <%= render '/external_graphs/external_graph', graph: content.content %>
         <% end %>
       <% end %>
     </div>

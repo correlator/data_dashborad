@@ -4,6 +4,7 @@ class CreateContent < ActiveRecord::Migration
       t.integer :page_id
       t.string :content_type
       t.integer :content_id
+      t.integer :order
 
       t.timestamps
     end

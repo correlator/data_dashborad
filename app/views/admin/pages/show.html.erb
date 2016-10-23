@@ -1,28 +1,56 @@
 <% provide :title, @page.name %>
 
-<h1 class="text-center"><%= link_to @page.category.name, admin_category_path(@page.category) if @page.category %></h1>
 <h1 class="text-center"><%= "Manage #{@page.name}" %></h1>
 </br>
 
-<div class="edit-page-container">
-  <ul class="nav nav-tabs nav-justified">
-    <li role="presentation" class="active"><a href="#manage-graphs" data-toggle="tab">Manage Graphs</a></li>
-    <li role="presentation"><a href="#manage-cards" data-toggle="tab">Manage Cards</a></li>
-  </ul>
-    <div class="tab-content">
-      <div class="tab-pane fade in active" id="manage-graphs">
-        <%= render 'manage_graphs' %>
-      </div>
-      <div class="tab-pane fade" id="manage-cards">
-        <%= render 'manage_cards' %>
-      </div>
-    </div>
-  </div>
+<div class="section-holder">
+  <table class="table table-striped table-bordered" id="content-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @page.contents.each do |content| %>
+        <tr id="page-content-<%= content.id %>" data-id="<%= content.id %>">
+          <td><%= content.content.title %></td>
+          <td><%= content.content_type %></td>
+          <td><%= link_to('Edit', "/admin/#{content.content_type.pluralize.underscore}/#{content.content.id}") %></td>
+          <td><%= link_to('Destroy', admin_content_url(content, format: :js), method: :delete, remote: true) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
-
 <script>
-  $(document).ready(function() {
-    jQuery(".best_in_place").best_in_place();
-  });
+  var fixHelper = function(e, ui) {
+    ui.children().each(function() {
+      $(this).width($(this).width());
+    });
+    return ui
+  };
+  $("#content-table tbody").sortable({
+    helper: fixHelper,
+    revert: 'invalid',
+    placeholder: 'placeholder',
+    forceHelperSize: true,
+    start: function( event, ui ) {
+      ui.placeholder.height(ui.item.height())
+      ui.placeholder.width(ui.item.width())
+    },
+    update: function(event, ui) {
+      var contentIds = $.map($(event.target).children('tr'), function(n) { return $(n).data('id')});
+      $.ajax({
+        data: { content_ids: contentIds },
+        url: "<%= admin_page_reorder_url(@page) %>",
+        type: 'PUT',
+        success: function(response) {
+        }
+      });
+    }
+  }).disableSelection();
 </script>

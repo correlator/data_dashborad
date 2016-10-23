@@ -2,6 +2,7 @@ class Page < ActiveRecord::Base
   belongs_to :category
   belongs_to :admin
   has_many :contents
+
   has_many :graphs, through: :contents, source: :content, :source_type => 'Graph'
   has_many :external_graphs, through: :contents, source: :content, :source_type => 'ExternalGraph'
   has_many :cards, through: :contents, source: :content, :source_type => 'Card'
@@ -26,7 +27,4 @@ class Page < ActiveRecord::Base
     admin.email if admin
   end
 
-  def contents
-    (graphs + external_graphs).sort_by(&:order)
-  end
 end

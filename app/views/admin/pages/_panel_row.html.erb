@@ -1,0 +1,13 @@
+<li id="page-listitem-<%= page.id %>" data-id=<%= page.id %>>
+  <div class="page-listitem sort-container">
+    &nbsp<i class="fa fa-sort" aria-hidden="true"></i>
+  </div>
+  <div class="page-listitem name-container">
+    <%= best_in_place page, :name, url: admin_page_url(page) %>
+  </div>
+  <div class="page-listitem actions-container">
+    <%= link_to 'Manage', admin_page_url(page), class: 'text-right'%>
+    &nbsp
+    <%= link_to 'Delete', admin_page_url(page), data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'text-right'%>
+  </div>
+</li>
