@@ -28,11 +28,7 @@ class Admin::GraphsController < AdminController
     if current_admin.super_admin
       @graph.destroy
     end
-    if @graph.page
-      redirect_to admin_page_path(@graph.page)
-    else
-      redirect_to admin_graphs_path
-    end
+    redirect_to admin_content_index_url
   end
 
   private

@@ -2,6 +2,55 @@
 
 <h1 class="text-center">Manage Content</h1>
 
+<div class="row">
+  <div class="col-md-3 col-md-offset-3">
+    <button class="btn btn-primary btn-wide" onClick="toggleForm('#create-card-container')">
+      Create Card
+    </button>
+  </div>
+  <div class="col-md-3">
+    <button class="btn btn-info btn-wide" onClick="toggleForm('#create-graph-container')">
+      Create Embed
+    </button>
+  </div>
+</div>
+
+<div class="section-holder form-container collapsed" id="create-card-container">
+  <h3 class="text-center">
+    Create Card
+  </h3>
+  <div class="row inline-form-row">
+    <%= form_for Card.new, url: admin_cards_url do |f| %>
+      <div class="col-md-4 col-md-offset-2">
+        <%= f.label :title, class: 'sr-only' %>
+        <%= f.text_field :title, class: 'form-control', placeholder: 'Title' %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.submit 'Create Card', class: 'btn btn-success btn-wide' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="section-holder form-container collapsed" id="create-graph-container">
+  <h3 class="text-center">
+    Create Embed
+  </h3>
+  <div class="row inline-form-row">
+    <%= form_for ExternalGraph.new, url: admin_external_graphs_url do |f| %>
+      <div class="col-md-4 col-md-offset-2">
+        <%= f.label :title, class: 'sr-only' %>
+        <%= f.text_field :title, class: 'form-control', placeholder: 'Title' %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.submit 'Create Embed', class: 'btn btn-success btn-wide' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <div class="section-holder">
   <table class="table table-striped table-bordered" id="content-table">
     <thead>
@@ -18,7 +67,7 @@
           <td><%= external_graph.title %></td>
           <td>External Graph</td>
           <td><%= link_to('Edit', admin_external_graph_url(external_graph)) %></td>
-          <td><%= link_to('Destroy', "#", method: :delete, data: { confirm: '' }) %></td>
+          <td><%= link_to('Destroy', admin_external_graph_url(external_graph), method: :delete, data: { confirm: 'Are you sure?' }) %></td>
         </tr>
       <% end %>
       <% @graphs.each do |graph| %>
@@ -26,7 +75,7 @@
           <td><%= graph.title %></td>
           <td>Graph</td>
           <td><%= link_to('Edit', admin_graph_url(graph)) %></td>
-          <td><%= link_to('Destroy', "", method: :delete, data: { confirm: '' }) %></td>
+          <td><%= link_to('Destroy', admin_graph_url(graph), method: :delete, data: { confirm: 'Are you sure?' }) %></td>
         </tr>
       <% end %>
       <% @cards.each do |card| %>
@@ -34,7 +83,7 @@
           <td><%= card.title %></td>
           <td>Card</td>
           <td><%= link_to('Edit', admin_card_url(card)) %></td>
-          <td><%= link_to('Destroy', "", method: :delete, data: { confirm: '' }) %></td>
+          <td><%= link_to('Destroy', admin_card_url(card), method: :delete, data: { confirm: 'Are you sure?' }) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -46,4 +95,9 @@
   $(document).ready(function() {
      $('#content-table').DataTable();
   });
+
+  function toggleForm(formId) {
+    $(".form-container").slideUp();
+    $(formId).slideDown();
+  }
 </script>
