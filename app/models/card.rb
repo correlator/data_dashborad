@@ -1,11 +1,31 @@
 class Card < ActiveRecord::Base
+  include PgSearch
   belongs_to :admin
   has_many :contents
-  has_many :pages, through: :contents
 
   default_scope { order(:order) }
   scope :orphaned, -> do
     where("page_id not in (#{Page.pluck(:id).join(',')}) OR page_id IS NULL")
+  end
+
+  multisearchable :against => [:title, :admin_email]
+
+  def admin_email
+    admin.email
+  end
+
+  def pages
+    Content.where(content_id: id, content_type: 'Card').map(&:page)
+  end
+
+  def to_search_result
+    {
+      id: id,
+      class: 'Card',
+      title: title,
+      admin: admin.try(:email),
+      icon: 'sticky-note-o'
+    }
   end
 
   def self.icons

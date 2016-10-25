@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :pages, only: [:show]
 
-  get 'search', to: 'search#index'
+  get '/search', to: 'search#index'
 
   namespace :admin do
     resources :categories

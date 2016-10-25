@@ -6,8 +6,12 @@
     <%= best_in_place page, :name, url: admin_page_url(page) %>
   </div>
   <div class="page-listitem actions-container">
-    <%= link_to 'Manage', admin_page_url(page), class: 'text-right'%>
+    <%= link_to admin_page_url(page), class: 'text-right' do%>
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+    <% end %>
     &nbsp
-    <%= link_to 'Delete', admin_page_url(page), data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'text-right'%>
+    <%= link_to admin_page_url(page), data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'text-right' do %>
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    <% end %>
   </div>
 </li>

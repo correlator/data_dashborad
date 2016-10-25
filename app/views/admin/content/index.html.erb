@@ -8,7 +8,7 @@
       <tr>
         <th>Name</th>
         <th>Type</th>
-        <th>Edit</th>
+        <th>Manage</th>
         <th>Delete</th>
       </tr>
     </thead>
@@ -17,7 +17,7 @@
         <tr>
           <td><%= external_graph.title %></td>
           <td>External Graph</td>
-          <td><%= link_to('Edit', admin_external_graph_url(external_graph)) %></td>
+          <td><%= link_to('Manage', admin_external_graph_url(external_graph)) %></td>
           <td><%= link_to('Destroy', "#", method: :delete, data: { confirm: '' }) %></td>
         </tr>
       <% end %>
@@ -25,7 +25,7 @@
         <tr>
           <td><%= graph.title %></td>
           <td>Graph</td>
-          <td><%= link_to('Edit', admin_graph_url(graph)) %></td>
+          <td><%= link_to('Manage', admin_graph_url(graph)) %></td>
           <td><%= link_to('Destroy', "", method: :delete, data: { confirm: '' }) %></td>
         </tr>
       <% end %>
@@ -33,7 +33,7 @@
         <tr>
           <td><%= card.title %></td>
           <td>Card</td>
-          <td><%= link_to('Edit', admin_card_url(card)) %></td>
+          <td><%= link_to('Manage', admin_card_url(card)) %></td>
           <td><%= link_to('Destroy', "", method: :delete, data: { confirm: '' }) %></td>
         </tr>
       <% end %>
