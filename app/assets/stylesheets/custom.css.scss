@@ -149,3 +149,11 @@ body {
 .table-striped > tbody > tr:nth-of-type(even) {
   background-color: #fff;
 }
+
+.inline-form-row {
+  margin-bottom: 30px;
+}
+
+.collapsed {
+  display: none;
+}

@@ -5,7 +5,7 @@ class Admin::ExternalGraphsController < AdminController
 
   def create
     @external_graph = ExternalGraph.create(external_graph_params)
-    redirect_to admin_page_path(@external_graph.page)
+    redirect_to admin_external_graph_path(@external_graph)
   end
 
   def show
@@ -28,11 +28,7 @@ class Admin::ExternalGraphsController < AdminController
     if current_admin.super_admin
       @external_graph.destroy
     end
-    if @external_graph.page
-      redirect_to admin_page_path(@external_graph.page)
-    else
-      redirect_to admin_external_graphs_path
-    end
+    redirect_to admin_content_index_url
   end
 
   private
