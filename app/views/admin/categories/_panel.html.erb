@@ -1,5 +1,6 @@
 <li class="panel panel-info" data-url="<%= admin_reorder_url %>" data-id="<%= category.id %>" >
   <div class="panel-heading">
+    &nbsp<i class="fa fa-sort" aria-hidden="true"></i>&nbsp
     <%= best_in_place category, :name, url: admin_category_url(category) %> &nbsp
     <%= link_to admin_category_url(category), data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'text-right' do %>
       <i class="fa fa-trash" aria-hidden="true"></i>
