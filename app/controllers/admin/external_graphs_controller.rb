@@ -1,6 +1,5 @@
 class Admin::ExternalGraphsController < AdminController
   def index
-    @graphs = ExternalGraph.orphaned
   end
 
   def create
