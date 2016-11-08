@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Category, type: :model do
   let(:admin) { FactoryGirl.create(:admin) }
-  let!(:graph) { Graph.create(title: 'Sweet new graph') }
+  let!(:graph) { Graph.create(title: 'Sweet new graph', admin_id: admin.id) }
 
   context 'validations' do
     it 'should require titles to be unique' do
@@ -20,19 +20,15 @@ describe Category, type: :model do
   end
 
   context 'creation' do
-    # This is just to get the thing out the door we want to initialize
-    # a graph with 2 lines.  One called goal and another called data.
-    # Eventually want to add as many lines as desired in the ux.
-
     it 'should start with 2 lines' do
-      new_graph = Graph.create(title: 'new_graph')
+      new_graph = admin.graphs.create(title: 'new_graph')
       expect(new_graph.lines.pluck(:title)).to match_array ['Goal', 'Data']
     end
   end
 
   context 'scopes' do
     let(:page) { FactoryGirl.create(:page)}
-    let!(:owned_graph) { Graph.create(title: 'Graphy', page_id: page.id) }
+    let!(:owned_graph) { admin.graphs.create(title: 'Graphy', page_id: page.id) }
     it 'should find the orphaned graphs' do
       expect(Graph.orphaned).to eq [graph]
     end
@@ -40,8 +36,6 @@ describe Category, type: :model do
 
 
   context 'data' do
-    # create a goal line with 3 values and dates
-    # and a data line with 2 values and dates
     before do
       line_goal.points = [goal_point1, goal_point2, goal_point3]
       line_data.points = [data_point2, data_point1]
@@ -56,7 +50,7 @@ describe Category, type: :model do
 
     let(:line_goal) { Line.create(title: 'Goal') }
     let(:line_data) { Line.create(title: 'Data') }
-    let(:graph) { Graph.create(title: 'Text Graph', unit: 'Calls') }
+    let(:graph) { admin.graphs.create(title: 'Text Graph', unit: 'Calls') }
 
     it 'should know its data' do
       expect(graph.data).to match_array(
