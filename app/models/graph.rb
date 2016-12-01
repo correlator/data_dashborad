@@ -1,4 +1,5 @@
 class Graph < ActiveRecord::Base
+  include PgSearch
   validates :title, uniqueness: true
   validates :width, :inclusion => { :in => [12, 6, 4, 3] }
   validates :style, :inclusion => { :in => ['spline', 'bar'] }
@@ -12,6 +13,26 @@ class Graph < ActiveRecord::Base
 
   scope :orphaned, -> do
     where("page_id not in (#{Page.pluck(:id).join(',')}) OR page_id IS NULL")
+  end
+
+  multisearchable :against => [:title, :admin_email]
+
+  def admin_email
+    admin.email
+  end
+
+  def pages
+    Content.where(content_id: id, content_type: 'Graph').map(&:page)
+  end
+
+  def to_search_result
+    {
+      id: id,
+      class: 'Graph',
+      title: title,
+      admin: admin.try(:email),
+      icon: 'line-chart'
+    }
   end
 
   def data

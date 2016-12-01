@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
-    resources :pages, only: [:show]
+  resources :pages, only: [:show]
+
+  get '/search', to: 'search#index'
 
   namespace :admin do
     resources :categories

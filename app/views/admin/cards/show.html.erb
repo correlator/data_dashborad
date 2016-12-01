@@ -1,5 +1,8 @@
 <div class="row section-holder">
   <h1 class="text-center"><%= "Manage #{@card.title}" %></h1>
+  <%  @card.pages.each do |page| %>
+    <h3 class="text-center"><%= link_to page.name, admin_page_path(page) %></h3>
+  <% end %>
   <div class="row">
     <div class= "col-sm-6 col-sm-offset-3">
       <%= form_for(@card, url: admin_card_path(@card)) do |f| %>

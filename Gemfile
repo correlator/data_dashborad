@@ -16,6 +16,8 @@ gem 'best_in_place'
 gem 'rollbar'
 gem 'newrelic_rpm'
 
+gem 'pg_search'
+
 gem 'devise'
 
 group :production do

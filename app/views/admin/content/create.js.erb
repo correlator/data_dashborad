@@ -1,0 +1,24 @@
+html = "<%= j render '/admin/content/page_row', content: @content %>"
+
+$("#content-table tbody").prepend(html);
+
+$("#content-table tbody").sortable({
+  helper: fixHelper,
+  revert: 'invalid',
+  placeholder: 'placeholder',
+  forceHelperSize: true,
+  start: function( event, ui ) {
+    ui.placeholder.height(ui.item.height())
+    ui.placeholder.width(ui.item.width())
+  },
+  update: function(event, ui) {
+    var contentIds = $.map($(event.target).children('tr'), function(n) { return $(n).data('id')});
+    $.ajax({
+      data: { content_ids: contentIds },
+      url: "<%= admin_page_reorder_url(@content.page) %>",
+      type: 'PUT',
+      success: function(response) {
+      }
+    });
+  }
+}).disableSelection();

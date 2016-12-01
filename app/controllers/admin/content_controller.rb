@@ -5,6 +5,13 @@ class Admin::ContentController < AdminController
     @cards = Card.all
   end
 
+  def create
+    @content = Content.create(content_params)
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def destroy
     if current_admin.super_admin
       @content = Content.find(params[:id])
@@ -13,5 +20,12 @@ class Admin::ContentController < AdminController
     respond_to do |format|
       format.js
     end
+  end
+
+  private
+
+  def content_params
+    params.require(:content)
+          .permit(:page_id, :content_type, :content_id, :order)
   end
 end
