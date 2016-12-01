@@ -41,11 +41,11 @@ RSpec.describe Admin::PagesController, type: :controller do
       end.to change { Page.count }.by 1
     end
 
-    it 'should render the page that was just created' do
+    it 'should redirect to the admin categories path' do
       post :create, page: { name: 'First',
                             category_id: category.id,
                             admin_id: admin.id }
-      expect(response).to render_template(:show)
+      expect(response).to redirect_to admin_categories_path
     end
   end
 end

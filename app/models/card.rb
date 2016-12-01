@@ -4,9 +4,6 @@ class Card < ActiveRecord::Base
   has_many :contents
 
   default_scope { order(:order) }
-  scope :orphaned, -> do
-    where("page_id not in (#{Page.pluck(:id).join(',')}) OR page_id IS NULL")
-  end
 
   multisearchable :against => [:title, :admin_email]
 

@@ -6,10 +6,6 @@ class ExternalGraph < ActiveRecord::Base
   has_many :contents
   has_many :pages, through: :contents
 
-  scope :orphaned, -> do
-    where("page_id not in (#{Page.pluck(:id).join(',')}) OR page_id IS NULL")
-  end
-
   multisearchable :against => [:title, :admin_email]
 
   def admin_email
