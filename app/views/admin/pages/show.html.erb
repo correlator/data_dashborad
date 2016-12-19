@@ -3,9 +3,14 @@
 <h1 class="text-center"><%= "Manage #{@page.name}" %></h1>
 </br>
 
-<h3>
-  <%= best_in_place @page, :intro_text, url: admin_page_url(@page), as: :textarea %>
-</h3>
+<div class="section-holder row">
+  <h2 class="text-center">Introduction Text <small>click to edit</small></h2>
+  <div class="col-md-10 col-md-offset-1">
+    <h4>
+      <%= best_in_place @page, :intro_text, url: admin_page_url(@page), as: :textarea %>
+    </h4>
+  </div>
+</div>
 
 
 <div class="section-holder row">
