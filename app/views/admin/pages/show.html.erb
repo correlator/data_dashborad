@@ -3,6 +3,11 @@
 <h1 class="text-center"><%= "Manage #{@page.name}" %></h1>
 </br>
 
+<h3>
+  <%= best_in_place @page, :intro_text, url: admin_page_url(@page), as: :textarea %>
+</h3>
+
+
 <div class="section-holder row">
   <div class="col-md-6 col-md-offset-3">
     <h3>
@@ -31,6 +36,7 @@
 </div>
 
 <script>
+  jQuery(".best_in_place").best_in_place();
   var fixHelper = function(e, ui) {
     ui.children().each(function() {
       $(this).width($(this).width());
