@@ -15,6 +15,7 @@ class Admin::ExternalGraphsController < AdminController
     @external_graph = ExternalGraph.find(params[:id])
     respond_to do |format|
       if @external_graph.update(external_graph_params)
+        format.html { render :show }
         format.json { render json: @external_graph }
       else
         format.json { render json: @external_graph.errors, status: :unprocessable_entity }
@@ -34,8 +35,11 @@ class Admin::ExternalGraphsController < AdminController
 
   def external_graph_params
     ps = params.require(:external_graph)
-          .permit(:order, :title, :external_url, :page_id, :width, :height)
+          .permit(:order, :title, :external_url, :page_id,
+                  :width, :height, :tags => [])
     ps[:admin_id] = current_admin.id
+    ps[:tags] = ps[:tags].delete_if { |tag| tag.blank? }
+    ps[:tags] = ps[:tags].map { |tag| Tag.where(name: tag).first_or_create }
     ps
   end
 end

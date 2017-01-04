@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024230446) do
+ActiveRecord::Schema.define(version: 20170104005549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,5 +142,19 @@ ActiveRecord::Schema.define(version: 20161024230446) do
   end
 
   add_index "points", ["line_id"], name: "index_points_on_line_id", using: :btree
+
+  create_table "tag_joins", force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "taggable_id"
+    t.integer "taggable_type"
+  end
+
+  add_index "tag_joins", ["taggable_id", "taggable_type"], name: "index_tag_joins_on_taggable_id_and_taggable_type", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
 end

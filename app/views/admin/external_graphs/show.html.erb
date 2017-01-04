@@ -16,24 +16,41 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <h4>Edit</h4>
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Width</th>
-            <th>Height</th>
-            <th>Url</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= best_in_place(@external_graph, :title, url: admin_external_graph_path(@external_graph)) %></td>
-            <td><%= best_in_place(@external_graph, :width, type: :select, collection:  { '12': 'Full', '6': 'Half', '4': 'Third', '3': 'Quarter' }, url: admin_external_graph_path(@external_graph)) %></td>
-            <td><%= best_in_place(@external_graph, :height, url: admin_external_graph_path(@external_graph)) %></td>
-            <td><%= best_in_place(@external_graph, :external_url, url: admin_external_graph_path(@external_graph)) %></td>
-          </tr>
-        </tbody>
-      </table>
+      <%= form_for(@external_graph, url: admin_external_graph_path(@external_graph)) do |f| %>
+        <div class="form-group">
+          <%= f.label('Title', class: 'padded-label') %>
+          <%= f.text_field :title, autofocus: true, placeholder: 'Title for external graph', class: 'form-control', required: true %>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <%= f.label(:width, class: 'padded-label') %>
+              <%= f.select :width, {'Full' => '12', 'Half' => '6', 'Third' => '4', 'Quarter' => '3'},
+                                   {},
+                                   class: 'form-control', required: true %>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <%= f.label(:height, class: 'padded-label') %>
+              <%= f.number_field :height, autofocus: true, placeholder: 'height', class: 'form-control', required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label(:external_url, class: 'padded-label') %>
+          <%= f.text_field :external_url, placeholder: 'http://website.com', autofocus: true, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label('Tags', class: 'padded-label') %>
+          <%= f.select(:tags, options_for_select(Tag.pluck(:name), @external_graph.tags.pluck(:name)),
+                              {},
+                              { multiple: true , required: true }) %>
+        </div>
+        <div class="form-group">
+          <%= f.submit 'Update External Graph', class: 'btn btn-success btn-wide', id: 'submit_button', required: true %>
+        </div>
+      <% end%>
     </div>
   </div>
 </div>
@@ -41,7 +58,9 @@
   $(document).ready(function() {
     jQuery(".best_in_place").best_in_place();
   });
-  $('.best_in_place').bind("ajax:success", function(){
-    location.reload();
-  });
+ $("#external_graph_width").select2({ });
+ $("#external_graph_tags").select2({
+   tags: true,
+   multiple: true,
+ });
 </script>

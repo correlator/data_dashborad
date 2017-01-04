@@ -59,6 +59,12 @@
           <%= f.text_field :trend, autofocus: true, placeholder: 'Trend', class: 'form-control' %>
         </div>
         <div class="form-group">
+          <%= f.label('Tags', class: 'padded-label') %>
+          <%= f.select(:tags, options_for_select(Tag.pluck(:name), @card.tags.pluck(:name)),
+                              {},
+                              { multiple: true , required: true }) %>
+        </div>
+        <div class="form-group">
           <%= f.submit 'Update Card', class: 'btn btn-success btn-wide', id: 'submit_button', required: true %>
         </div>
       <% end%>
@@ -84,6 +90,10 @@
  $("#card_icon").select2({
    templateSelection: formatIcon,
    templateResult: formatIcon,
+ });
+ $("#card_tags").select2({
+   tags: true,
+   multiple: true,
  });
  $("#card_color").select2({});
 </script>

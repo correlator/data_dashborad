@@ -5,6 +5,8 @@ class ExternalGraph < ActiveRecord::Base
   belongs_to :admin
   has_many :contents
   has_many :pages, through: :contents
+  has_many :tag_joins, as: :taggable
+  has_many :tags, through: :tag_joins
 
   multisearchable :against => [:title, :admin_email]
 

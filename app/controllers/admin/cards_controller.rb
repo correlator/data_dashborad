@@ -39,8 +39,10 @@ class Admin::CardsController < AdminController
     ps = params.require(:card)
                .permit(:order, :title, :goal, :goal_date, :value, :value_date,
                        :source, :trend, :icon, :page_id, :color,
-                       :percentage_complete)
+                       :percentage_complete, :tags => [])
     ps[:admin_id] = current_admin.id
+    ps[:tags] = ps[:tags].delete_if { |tag| tag.blank? }
+    ps[:tags] = ps[:tags].map { |tag| Tag.where(name: tag).first_or_create }
     ps
   end
 end

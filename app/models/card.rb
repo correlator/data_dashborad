@@ -2,6 +2,8 @@ class Card < ActiveRecord::Base
   include PgSearch
   belongs_to :admin
   has_many :contents
+  has_many :tag_joins, as: :taggable
+  has_many :tags, through: :tag_joins
 
   default_scope { order(:order) }
 
