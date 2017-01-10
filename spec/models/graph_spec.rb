@@ -26,15 +26,6 @@ describe Category, type: :model do
     end
   end
 
-  context 'scopes' do
-    let(:page) { FactoryGirl.create(:page)}
-    let!(:owned_graph) { admin.graphs.create(title: 'Graphy', page_id: page.id) }
-    it 'should find the orphaned graphs' do
-      expect(Graph.orphaned).to eq [graph]
-    end
-  end
-
-
   context 'data' do
     before do
       line_goal.points = [goal_point1, goal_point2, goal_point3]
