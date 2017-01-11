@@ -18,12 +18,6 @@ RSpec.describe Admin::PagesController, type: :controller do
       page2
     end
 
-    it 'should return the orphaned pages when admin is singed in' do
-      sign_in admin
-      get :index
-      expect(assigns(:pages)).to match_array [page1]
-    end
-
     it 'should redirect to root when admin is singed out' do
       get :index
       expect(response).to redirect_to(root_path)
