@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104005549) do
+ActiveRecord::Schema.define(version: 20170111212634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20170104005549) do
   create_table "lines", force: :cascade do |t|
     t.string  "title"
     t.integer "graph_id"
+    t.integer "card_id"
   end
 
   add_index "lines", ["graph_id"], name: "index_lines_on_graph_id", using: :btree
@@ -139,6 +140,7 @@ ActiveRecord::Schema.define(version: 20170104005549) do
     t.datetime "updated_at"
     t.string   "time"
     t.integer  "position"
+    t.date     "point_date"
   end
 
   add_index "points", ["line_id"], name: "index_points_on_line_id", using: :btree

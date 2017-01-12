@@ -4,6 +4,7 @@ class Card < ActiveRecord::Base
   has_many :contents
   has_many :tag_joins, as: :taggable
   has_many :tags, through: :tag_joins
+  has_one :line
 
   default_scope { order(:order) }
 
@@ -15,6 +16,17 @@ class Card < ActiveRecord::Base
 
   def pages
     Content.where(content_id: id, content_type: 'Card').map(&:page)
+  end
+
+  def data
+    data = []
+    line.points.each do |point|
+      data << { 'dateField' => point.point_date,
+                'line' => title,
+                'notes' => point.id.to_s + '*&*' + point.notes.to_s,
+                'value' => point.value }
+    end
+    data
   end
 
   def to_search_result

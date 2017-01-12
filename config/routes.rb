@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
   resources :pages, only: [:show]
+  resources :cards, only: [:show, :update]
+  resources :points, only: [:create, :update]
 
   get '/search', to: 'search#index'
 
