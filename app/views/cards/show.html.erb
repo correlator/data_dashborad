@@ -1,7 +1,27 @@
+<div class="title-holder <%= @card.color %>">
+  <h1 class="text-center">
+    <%= @card.title %>
+  </h1>
+  <h3 class="text-center">
+    <div class="row">
+      <div class= col-md-4>
+        <b>Goal:</b><%= @card.goal %>
+      </div>
+      <div class= col-md-4>
+        <b>Value: </b><%= @card.value %>
+      </div>
+      <div class= col-md-4>
+        <b>Trend</b><%= @card.trend %>
+      </div>
+    </div>
+    </br>
+    <% if @card.source.present? %>
+      <%= link_to 'View Source', @card.source %>
+    <% end %>
+  </h3>
+</div>
 <div class="panel panel-default">
   <div class="panel-body">
-    <div class="row">
-      <div class=<%= "col-sm-12" %>>
         <script type="text/javascript">
           jQuery(document).ready(function($) {
             if( ! $.isFunction($.fn.dxChart)) {
@@ -43,7 +63,6 @@
               tooltip:{
                 enabled: true
               },
-              title: "<%= @card.title %>",
               commonPaneSettings: {
                 border:{
                   visible: true,
@@ -67,8 +86,6 @@
           });
         </script>
         <div id=<%= "bar-#{@card.id}" %> style="height: 509px; width: 100%;"></div>
-      </div>
-    </div>
   </div>
 </div>
 
