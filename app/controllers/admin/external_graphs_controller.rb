@@ -38,8 +38,10 @@ class Admin::ExternalGraphsController < AdminController
           .permit(:order, :title, :external_url, :page_id,
                   :width, :height, :tags => [])
     ps[:admin_id] = current_admin.id
-    ps[:tags] = ps[:tags].delete_if { |tag| tag.blank? }
-    ps[:tags] = ps[:tags].map { |tag| Tag.where(name: tag).first_or_create }
+    if ps[:tags]
+      ps[:tags] = ps[:tags].delete_if { |tag| tag.blank? }
+      ps[:tags] = ps[:tags].map { |tag| Tag.where(name: tag).first_or_create }
+    end
     ps
   end
 end
