@@ -20,7 +20,7 @@ class Card < ActiveRecord::Base
 
   def data
     data = []
-    line.points.each do |point|
+    line.points.order(:point_date).each do |point|
       data << { 'dateField' => point.point_date,
                 'line' => title,
                 'notes' => point.id.to_s + '*&*' + point.notes.to_s,

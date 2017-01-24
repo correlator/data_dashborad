@@ -3,13 +3,15 @@
   <%  @card.pages.each do |page| %>
     <h3 class="text-center"><%= link_to page.name, admin_page_path(page) %></h3>
   <% end %>
-  <div class="text-center">
-    <%= link_to "Manage Data", @card, class: 'btn btn-primary' %>
-  </div>
   </br>
   </br>
   <div class="row">
-    <div class= "col-sm-6 col-sm-offset-3">
+    <div class= "col-sm-4"></div>
+    <%= render '/layouts/card', card: @card %>
+  </div>
+  <div class="row">
+    <div class= "col-sm-6">
+      <h3 class="text-center">Manage Card</h3>
       <%= form_for(@card, url: admin_card_path(@card)) do |f| %>
         <div class="form-group">
           <%= f.label('Icon', class: 'padded-label') %>
@@ -48,13 +50,12 @@
         </div>
       <% end%>
     </div>
-  </div>
-  </br>
-  </br>
-  </br>
-  <div class="row">
-    <div class= "col-sm-4"></div>
-    <%= render '/layouts/card', card: @card %>
+    <div class="col-sm-6">
+      <h3 class="text-center">Manage Data</h3>
+      <div class="text-center" style="margin-top: 20px;">
+        <%= link_to "Go To Manage Data", @card, class: 'btn btn-primary' %>
+      </div>
+    </div>
   </div>
 </div>
 
