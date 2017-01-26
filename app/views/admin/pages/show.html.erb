@@ -99,14 +99,15 @@
     minLength: 1
     }).data("ui-autocomplete")._renderItem = function(ul, item) {
         var $a = $("<a></a>");
-        console.log(item.icon);
+        console.log(item);
+        console.log(item.tags);
         var inner_html = '<div class="advanced-search-result-container">' +
             '<div class="advanced-search-result-image-container">' +
             '<i class="fa fa-' + item.icon + '" aria-hidden="true"></i>' +
             '</div>' +
             '<div class="advanced-search-result-text-container">' +
-              '<h4>' + item.title + '</h4>' +
-              '<p>' + item.admin + '</p>'
+            '<h5>' + item.title  + '</h5>' +
+              '<p>' + item.admin + '</p>' +
             '</div>'
           '</div>';
         return $( "<li></li>" )

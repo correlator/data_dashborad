@@ -8,7 +8,7 @@ class Card < ActiveRecord::Base
 
   default_scope { order(:order) }
 
-  multisearchable :against => [:title, :admin_email]
+  multisearchable :against => [:title, :admin_email, :tag_names]
 
   def admin_email
     admin.email
@@ -35,7 +35,8 @@ class Card < ActiveRecord::Base
       class: 'Card',
       title: title,
       admin: admin.try(:email),
-      icon: 'sticky-note-o'
+      icon: 'sticky-note-o',
+      tags: tags.map(&:name).join(',')
     }
   end
 
@@ -65,5 +66,11 @@ class Card < ActiveRecord::Base
     else
       "GOAL: #{goal}"
     end
+  end
+
+  private
+
+  def tag_names
+    tags.map(&:name)
   end
 end
