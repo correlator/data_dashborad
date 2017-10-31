@@ -1,6 +1,8 @@
-<tr id="page-content-<%= content.id %>" data-id="<%= content.id %>">
-  <td><%= content.content.title %></td>
-  <td><%= content.content_type %></td>
-  <td><%= link_to('Manage', "/admin/#{content.content_type.pluralize.underscore}/#{content.content.id}") %></td>
-  <td><%= link_to('Remove', admin_content_url(content, format: :js), method: :delete, remote: true) %></td>
-</tr>
+<% unless content.content.nil? %>
+  <tr id="page-content-<%= content.id %>" data-id="<%= content.id %>">
+    <td><%= content.content.title %></td>
+    <td><%= content.content_type %></td>
+    <td><%= link_to('Manage', "/admin/#{content.content_type.pluralize.underscore}/#{content.content.id}") %></td>
+    <td><%= link_to('Remove', admin_content_url(content, format: :js), method: :delete, remote: true) %></td>
+  </tr>
+<% end %>
