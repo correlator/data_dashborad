@@ -3,13 +3,16 @@
   <%  @card.pages.each do |page| %>
     <h3 class="text-center"><%= link_to page.name, admin_page_path(page) %></h3>
   <% end %>
+  </br>
+  </br>
   <div class="row">
-    <div class= "col-sm-6 col-sm-offset-3">
+    <div class= "col-sm-4"></div>
+    <%= render '/layouts/card', card: @card %>
+  </div>
+  <div class="row">
+    <div class= "col-sm-6">
+      <h3 class="text-center">Manage Card</h3>
       <%= form_for(@card, url: admin_card_path(@card)) do |f| %>
-        <div class="form-group">
-          <%= f.label('Color', class: 'padded-label') %>
-          <%= f.select(:color, options_for_select(%w(green red blue), @card.color), required: true) %>
-        </div>
         <div class="form-group">
           <%= f.label('Icon', class: 'padded-label') %>
           <%= f.select(:icon, options_for_select(Card.icons, @card.icon), required: true) %>
@@ -17,20 +20,6 @@
         <div class="form-group">
           <%= f.label('Title', class: 'padded-label') %>
           <%= f.text_field :title, autofocus: true, placeholder: 'Title for card', class: 'form-control', required: true %>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <%= f.label('Current Value', class: 'padded-label') %>
-              <%= f.text_field :value, autofocus: true, placeholder: 'Current Value', class: 'form-control', required: true %>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <%= f.label('Date of Current Value', class: 'padded-label') %>
-              <%= f.text_field :value_date, autofocus: true, class: 'form-control', required: true %>
-            </div>
-          </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
@@ -47,35 +36,26 @@
           </div>
         </div>
         <div class="form-group">
-          <%= f.label('Percantge of goal completed:', class: 'padded-label') %>
-          <%= f.number_field :percentage_complete, autofocus: true, class: 'form-control' %>
-        </div>
-        <div class="form-group">
           <%= f.label('Source must start with http://', class: 'padded-label') %>
-          <%= f.text_field :source, autofocus: true, placeholder: 'url for data source', class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= f.label('Trend', class: 'padded-label') %>
-          <%= f.text_field :trend, autofocus: true, placeholder: 'Trend', class: 'form-control' %>
+          <%= f.url_field :source, autofocus: true, placeholder: 'url for data source', class: 'form-control' %>
         </div>
         <div class="form-group">
           <%= f.label('Tags', class: 'padded-label') %>
           <%= f.select(:tags, options_for_select(Tag.pluck(:name), @card.tags.pluck(:name)),
                               {},
-                              { multiple: true , required: true }) %>
+                              { multiple: true }) %>
         </div>
         <div class="form-group">
           <%= f.submit 'Update Card', class: 'btn btn-success btn-wide', id: 'submit_button', required: true %>
         </div>
       <% end%>
     </div>
-  </div>
-  </br>
-  </br>
-  </br>
-  <div class="row">
-    <div class= "col-sm-4"></div>
-    <%= render '/layouts/card', card: @card %>
+    <div class="col-sm-6">
+      <h3 class="text-center">Manage Data</h3>
+      <div class="text-center" style="margin-top: 20px;">
+        <%= link_to "Go To Manage Data", @card, class: 'btn btn-primary' %>
+      </div>
+    </div>
   </div>
 </div>
 

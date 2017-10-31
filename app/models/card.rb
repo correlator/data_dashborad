@@ -4,10 +4,11 @@ class Card < ActiveRecord::Base
   has_many :contents
   has_many :tag_joins, as: :taggable
   has_many :tags, through: :tag_joins
+  has_one :line
 
   default_scope { order(:order) }
 
-  multisearchable :against => [:title, :admin_email]
+  multisearchable :against => [:title, :admin_email, :tag_names]
 
   def admin_email
     admin.email
@@ -17,13 +18,25 @@ class Card < ActiveRecord::Base
     Content.where(content_id: id, content_type: 'Card').map(&:page)
   end
 
+  def data
+    data = []
+    line.points.order(:point_date).each do |point|
+      data << { 'dateField' => point.point_date,
+                'line' => title,
+                'notes' => point.id.to_s + '*&*' + point.notes.to_s,
+                'value' => point.value }
+    end
+    data
+  end
+
   def to_search_result
     {
       id: id,
       class: 'Card',
       title: title,
       admin: admin.try(:email),
-      icon: 'sticky-note-o'
+      icon: 'sticky-note-o',
+      tags: tags.map(&:name).join(',')
     }
   end
 
@@ -53,5 +66,11 @@ class Card < ActiveRecord::Base
     else
       "GOAL: #{goal}"
     end
+  end
+
+  private
+
+  def tag_names
+    tags.map(&:name)
   end
 end

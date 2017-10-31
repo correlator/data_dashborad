@@ -95,6 +95,11 @@ body {
   }
 }
 
+.blue {
+  background-color: #5f8b95;
+  color: #fff;
+}
+
 .xe-widget.xe-progress-counter.xe-progress-counter-green {
   background: #68b828;
   .xe-upper {
@@ -105,6 +110,11 @@ body {
   }
 }
 
+.green {
+  background-color: #68b828;
+  color: #fff;
+}
+
 .xe-widget.xe-progress-counter.xe-progress-counter-red {
   background: #d5080f;
   .xe-upper {
@@ -113,6 +123,11 @@ body {
   a {
     color: #08D5CE;
   }
+}
+
+.red {
+  background-color: #d5080f;
+  color: #fff;
 }
 
 .xe-label {
