@@ -12,10 +12,13 @@
     <div class="row">
       <% @page.contents.each do |content| %>
         <% if content.content_type == "Graph" %>
+          <% next if content.content.nil? %>
           <%= render '/graphs/graph', graph: content.content %>
         <% elsif content.content_type == "Card" %>
+          <% next if content.content.nil? %>
           <%= render '/layouts/card', card: content.content %>
         <% else %>
+          <% next if content.content.nil? %>
           <%= render '/external_graphs/external_graph', graph: content.content %>
         <% end %>
       <% end %>
