@@ -40,6 +40,10 @@
           <%= f.url_field :source, autofocus: true, placeholder: 'url for data source', class: 'form-control' %>
         </div>
         <div class="form-group">
+          <%= f.label('Source display name', class: 'padded-label') %>
+          <%= f.text_field :source_name, placeholder: 'Defaults to "Source"', class: 'form-control' %>
+        </div>
+        <div class="form-group">
           <%= f.label('Tags', class: 'padded-label') %>
           <%= f.select(:tags, options_for_select(Tag.pluck(:name), @card.tags.pluck(:name)),
                               {},

@@ -38,7 +38,7 @@ class Admin::CardsController < AdminController
   def card_params
     ps = params.require(:card)
                .permit(:order, :title, :goal, :goal_date, :value, :value_date,
-                       :source, :trend, :icon, :page_id, :color,
+                       :source, :source_name, :trend, :icon, :page_id, :color,
                        :percentage_complete, :tags => [])
     ps[:admin_id] = current_admin.id
     if ps[:tags]

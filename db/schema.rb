@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170111212634) do
+ActiveRecord::Schema.define(version: 20190820173249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20170111212634) do
     t.integer  "percentage_complete", default: 0
     t.string   "goal_date"
     t.string   "value_date"
+    t.string   "source_name",         default: "Source"
   end
 
   add_index "cards", ["page_id"], name: "index_cards_on_page_id", using: :btree

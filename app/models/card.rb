@@ -20,6 +20,7 @@ class Card < ActiveRecord::Base
 
   def data
     data = []
+    line = Line.create(card_id: self.id) unless line
     line.points.order(:point_date).each do |point|
       data << { 'dateField' => point.point_date,
                 'line' => title,
